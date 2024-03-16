@@ -80,7 +80,7 @@ const LoginForm =()=>{
 const Login = () => {
   return (
     <div className=''>
-      <div className='flex items-center justify-between rounded-2x'>
+      <div className='flex items-center justify-center rounded-2xl h-[86vh]'>
          <div className='bg-white w-[55rem] h-[35rem] flex rounded-xl'>
              <div className='w-[50%]'>
                <img src={loginImg}></img>  
