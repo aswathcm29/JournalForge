@@ -6,6 +6,7 @@ import './index.css'
 import {createBrowserRouter,RouterProvider} from 'react-router-dom'
 import Login from './components/Logincred/Login.jsx'
 import Signup from './components/Logincred/Signup.jsx'
+import Contactus from './components/Contact-us/Contactus.jsx'
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -18,6 +19,10 @@ const appRouter = createBrowserRouter([
      path:'/home',
      element:<App/>
     },
+    {
+      path:'/contactus',
+      element: <Contactus/>
+    }
   ]
 },
   {
