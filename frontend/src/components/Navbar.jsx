@@ -35,6 +35,7 @@ const Navbar = () => {
              <button onClick={()=>{setIsMenuOpen(!isMenuOpen)}}>
                <img src={(isMenuOpen)?close:hamburger} className='h-8 lg:hidden'/>
              </button>
+             </div>
         </header> 
         <hr className='h-[0.1rem] flex justify-center bg-green-500 mt-4 shadow-2xl'></hr>  
     </>
