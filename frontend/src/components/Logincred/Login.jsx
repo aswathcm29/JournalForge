@@ -1,21 +1,45 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable no-unused-vars */
-import React from 'react'
+import React, { useState } from 'react'
 import {useNavigate} from 'react-router-dom';
 import loginImg from '../../assets/image.png' 
+import axios from 'axios'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const LoginForm =()=>{
+
+    const [userName, setUserName] = useState('')
+    const [password, setPassword] = useState('')
+
     const navigate = useNavigate()
-    const toLogin =()=>{
+    const toSignup =()=>{
         navigate('/signup')
+    }
+
+    const handleSubmit = async(e) =>{
+        e.preventDefault()
+        const response = await axios.post('http://localhost:5000/users/login', {
+            userName, password
+        }, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        if(response.status === 200){
+            document.cookie = `journal_token=${response.data.message.token}`
+            console.log(document.cookie)
+            // navigate('/');
+        }
+        console.log(response)
     }
 
     return (    
         <div
                   style={{'animation': 'slideInFromLeft 1s ease-out'}}
-                  className="w-[50%] bg-gradient-to-r rounded-lb-xl shadow-2xl overflow-hidden p-10 space-y-8 rounded-r-xl">
-                <h2
+                  className="w-[100%] flex flex-col justify-center md:w-[50%] bg-gradient-to-r rounded-lb-xl shadow-2xl overflow-hidden p-10 space-y-8 rounded-r-xl">
+                <h2 
                     style={{'animation': 'appear 2s ease-out'}}
                     className="text-center text-4xl font-extrabold text-gray-900"
                 >
@@ -32,12 +56,14 @@ const LoginForm =()=>{
                             required=""
                             id="email"
                             name="email"
-                            type="email"
+                            type="text"
+                            value={userName}
+                            onChange={(e) => setUserName(e.target.value)}
                         />
                         <label
                             className="absolute left-0 -top-3.5 text-gray-500 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:text-purple-500 peer-focus:text-sm"
                             htmlFor="email"
-                            >Email address</label
+                            >User Name</label
                         >
                         </div>
                         <div className="relative">
@@ -48,6 +74,8 @@ const LoginForm =()=>{
                             id="password"
                             name="password"
                             type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
                         />
                         <label
                             className="absolute left-0 -top-3.5 text-gray-900 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:text-purple-500 peer-focus:text-sm"
@@ -66,12 +94,13 @@ const LoginForm =()=>{
                         <button
                         className="w-full py-2 px-4 bg-green-400 hover:bg-green-500 rounded-md shadow-lg text-white font-semibold transition duration-200"
                         type="submit"
+                        onClick={(e)=>handleSubmit(e)}
                         >
                         Sign In
                         </button>
                     </form>
                         <div className="text-center text-gray-900"> Don't have an account?
-                        <button className="text-green-500 px-2 hover:underline" onClick={toLogin}>Sign up</button>
+                        <button className="text-green-500 px-2 hover:underline" onClick={toSignup}>Sign up</button>
                      </div>
                 </div>
     )
@@ -81,8 +110,8 @@ const Login = () => {
   return (
     <div className=''>
       <div className='flex items-center justify-between rounded-2x'>
-         <div className='bg-white w-[55rem] h-[35rem] flex rounded-xl'>
-             <div className='w-[50%]'>
+         <div className='bg-white h-[35rem] flex rounded-xl'>
+             <div className='w-[50%] hidden md:block '>
                <img src={loginImg}></img>  
              </div>
                <LoginForm/>
