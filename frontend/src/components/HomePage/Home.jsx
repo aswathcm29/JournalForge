@@ -2,6 +2,7 @@
 import React from 'react'
 import Welcome from './Welcome'
 import PopJourn from './PopJourn'
+import About from './About'
 
 const Home = () => {
   return (
