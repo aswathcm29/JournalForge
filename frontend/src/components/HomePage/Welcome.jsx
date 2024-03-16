@@ -6,7 +6,7 @@ import { TypeAnimation } from 'react-type-animation';
 const Welcome = () => {
   return (
     <section className='h-[94vh]'>
-        <div className='h-full flex justify-start items-center relative pb-10 '>
+        <div className='h-full flex justify-center items-center relative pb-10 '>
         <div className='flex flex-col px-[9rem] z-10'>
             <p className='text-6xl flex flex-start'> <TypeAnimation
                sequence={[
@@ -24,7 +24,7 @@ const Welcome = () => {
             </div> 
        </div>
            <div>
-            <img src={homeimg} alt="" className='absolute z-0 top-[5rem] left-[-1.3rem]'></img>
+            <img src={homeimg} alt="" className='absolute z-0 top-[5rem] left-[4rem]'></img>
            </div>
         </div>
         <div>
