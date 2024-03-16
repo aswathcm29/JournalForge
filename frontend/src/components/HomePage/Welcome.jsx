@@ -1,9 +1,12 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
+import homeimg from '../../assets/homepage.png'
 
 const Welcome = () => {
   return (
-    <div>Welcome</div>
+    <div>
+        <img src={homeimg} className='w-full'></img>
+    </div>
   )
 }
 
