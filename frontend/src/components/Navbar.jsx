@@ -15,7 +15,7 @@ const Navbar = () => {
         <header className='flex items-center justify-between border-b-4 border-green-400'>
              <span className='text-5xl'>J<span className='text-4xl mb-2'>F</span></span>
              <div>
-                <input type='text' className='bg-transparent ring-1 ring-black w-[12rem] h-10 rounded-xl px-2 sm:w-[20rem]'
+                <input type='text' className='bg-transparent shadow-xl ring-1 ring-gray-400 w-[20rem] h-10 rounded-xl px-3'
                  placeholder='Search'
                 ></input>
              </div>
@@ -28,7 +28,7 @@ const Navbar = () => {
              <div className='block relative'>
                 <ul className={`
                   lg:flex flex-col lg:flex-row absolute lg:static gap-x-12 text-xl
-                  bg-[white] top-8  ${(isMenuOpen)?'-left-12':'hidden'} px-5 lg:p-0 border-4 border-cyan-600 ring lg:ring-0 overflow-hidden
+                   top-8  ${(isMenuOpen)?'-left-12':'hidden'} px-5 lg:p-0 border-4 border-cyan-600 ring lg:ring-0 overflow-hidden
                 `}>
                     <Link to='/home'><li className='p-4 lg:p-0 shadow-sm'>Home</li></Link>
                     <Link to='/about'><li className='p-4 lg:p-0'>About</li></Link> 
