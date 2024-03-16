@@ -111,7 +111,7 @@ const Login = () => {
     <div className=''>
       <div className='flex items-center justify-center rounded-2xl h-[86vh]'>
          <div className='bg-white w-[55rem] h-[35rem] flex rounded-xl'>
-             <div className='w-[50%]'>
+             <div className='w-[50%] hidden md:block'>
                <img src={loginImg}></img>  
              </div>
                <LoginForm/>
