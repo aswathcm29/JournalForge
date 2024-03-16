@@ -33,12 +33,9 @@ const login = async (req, res) => {
         else{
             return res.status(500).json({error:true,message:"Enter UserName and PassWord"})
         }
-
-        
     }
     catch(e){
         return res.status(404).json({error:true,message:e.message})
-
     }
 }
 
