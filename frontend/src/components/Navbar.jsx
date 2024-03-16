@@ -13,13 +13,9 @@ const Navbar = () => {
   return (
     <>
         <header className='flex items-center justify-between border-b-4 border-green-400'>
-             <span className='text-5xl'>J<span className='text-4xl mb-2'>F</span></span>
-             <div>
-                <input type='text' className='bg-transparent shadow-xl ring-1 ring-gray-400 w-[20rem] h-10 rounded-xl px-3'
-                 placeholder='Search'
-                ></input>
-             </div>
-             <div className='md:flex bg-green-400 w-[10rem] h-[3rem] items-center justify-center rounded-full gap-x-3 hidden'>
+             <span className='text-5xl'>J<span className='text-4xl mb-2 absolute'>F</span></span>
+             <div className='flex flex-row gap-x-4 justify-center items-center'>
+             <div className='flex bg-green-400 w-[15rem] h-[3rem] items-center justify-center rounded-full gap-x-3'>
                 <FaFile className='text-3xl px-2'></FaFile>
                 <span className='text-xl'>Publish</span>
              </div>
