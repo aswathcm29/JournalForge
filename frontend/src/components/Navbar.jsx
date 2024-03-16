@@ -10,11 +10,7 @@ const Navbar = () => {
     <div className=''>
         <header className='flex items-center justify-between border-b-4 border-green-400'>
              <span className='text-5xl'>J<span className='text-4xl mb-2 absolute'>F</span></span>
-             <div>
-                <input type='text' className='bg-transparent shadow-xl ring-1 ring-gray-400 w-[20rem] h-10 rounded-xl px-3'
-                 placeholder='Search'
-                ></input>
-             </div>
+             <div className='flex flex-row gap-x-4 justify-center items-center'>
              <div className='flex bg-green-400 w-[15rem] h-[3rem] items-center justify-center rounded-full gap-x-3'>
                 <FaFile className='text-3xl px-2'></FaFile>
                 <span className='text-xl'>Publish</span>
@@ -27,6 +23,8 @@ const Navbar = () => {
                     <Link to='/profile'><li className=''>Profile</li></Link>
                 </ul>
              </div>
+            </div>
+             
         </header> 
         <hr className='h-[0.1rem] flex justify-center bg-green-500 mt-4 shadow-2xl'></hr>  
     </div>
