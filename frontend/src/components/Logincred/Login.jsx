@@ -15,19 +15,24 @@ const LoginForm =()=>{
 
     const handleSubmit = async(e) =>{
         e.preventDefault()
-        const response = await axios.post('http://localhost:5000/users/login', {
+        try{
+            const response = await axios.post('http://localhost:5000/users/login', {
             userName, password
-        }, {
-            headers: {
-                'Content-Type': 'application/json'
+            }, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            console.log(response)
+            if(response.status === 200){
+                document.cookie = `journal_token=${response.data.message.token}`
+                console.log(document.cookie)
+                navigate('/');
             }
-        })
-        if(response.status === 200){
-            document.cookie = `journal_token=${response.data.message.token}`
-            console.log(document.cookie)
-            navigate('/');
         }
-        console.log(response)
+        catch(err){
+            console.log(err)
+        }
     }
 
     return (    

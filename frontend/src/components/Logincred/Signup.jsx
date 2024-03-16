@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import loginImg from '../../assets/image.png' 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import axiox from 'axios'
+import axios from 'axios'
 
 const SignupForm =()=>{
   const navigate  = useNavigate()
@@ -23,7 +23,7 @@ const SignupForm =()=>{
       return
     }
     try{
-      const response = await axiox.post('http://localhost:5000/users/signup', {
+      const response = await axios.post('http://localhost:5000/users/signup', {
         userName, email, password
       }, {
         headers: {
