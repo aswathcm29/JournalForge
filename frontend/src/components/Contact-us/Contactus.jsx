@@ -46,7 +46,7 @@ const ContactusForm = () =>{
                     <textarea 
                         type='text' 
                         placeholder='12345678'
-                        className='h-[130px] w-full border-solid border-2 border-[#333] rounded-md p-2'
+                        className='h-[130px] w-full border-solid border-2 border-[#333] rounded-md p-2 bg-[#f3f4f5] text-[#333]'
                     />
                 </div>
             </div>

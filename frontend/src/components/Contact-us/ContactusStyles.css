@@ -3,7 +3,7 @@
 }
 
 .input{
-    @apply border-0 border-b-2 border-solid border-b-gray-600 w-full h-10 p-2
+    @apply border-0 border-b-2 border-solid border-b-gray-600 w-full h-10 p-2 bg-[#f3f4f5]
 }
 
 .input-double-wrapper{
