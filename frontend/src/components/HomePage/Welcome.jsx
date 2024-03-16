@@ -5,9 +5,9 @@ import { TypeAnimation } from 'react-type-animation';
 
 const Welcome = () => {
   return (
-    <section className='h-[94vh]'>
+    <section  className='h-[70vh] mt-20'>
         <div className='h-full flex justify-center items-center relative pb-10 '>
-        <div className='flex flex-col px-[9rem] z-10'>
+        <div className='flex flex-col px-[9rem] z-10 '>
             <p className='text-6xl flex flex-start'> <TypeAnimation
                sequence={[
                 'Welcome to JournalForge',
@@ -27,9 +27,8 @@ const Welcome = () => {
             <img src={homeimg} alt="" className='absolute z-0 top-[5rem] left-[4rem]'></img>
            </div>
         </div>
-        <div>
-           
-        </div>
+      <div>  
+      </div>
     </section>
   )
 }

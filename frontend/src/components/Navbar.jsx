@@ -4,6 +4,7 @@ import { FaFile } from "react-icons/fa";
 import {Link} from 'react-router-dom'
 import hamburger from '../assets/burger-menu-svgrepo-com.svg'
 import close from '../assets/close-svgrepo-com.svg'
+import About from './HomePage/About';
 
 
 const Navbar = () => {
@@ -27,7 +28,7 @@ const Navbar = () => {
                    top-8  ${(isMenuOpen)?'-left-12':'hidden'} px-5 lg:p-0 border-4 border-cyan-600 ring lg:ring-0 overflow-hidden
                 `}>
                     <Link to='/home'><li className='p-4 lg:p-0 shadow-sm'>Home</li></Link>
-                    <Link to='/about'><li className='p-4 lg:p-0'>About</li></Link> 
+                    <a href='#about'><li className='p-4 lg:p-0 transition-transform ease-in-out'>About</li></a> 
                     <Link to='/journals'><li className='p-4 lg:p-0'>Journals</li></Link>
                     <Link to='/profile'><li className='p-4 lg:p-0'>Profile</li></Link>
                 </ul>
