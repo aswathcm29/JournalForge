@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useEffect } from 'react'
 import './App.css'
 import {Outlet, useNavigate} from 'react-router-dom'

@@ -6,6 +6,8 @@ import './index.css'
 import {createBrowserRouter,RouterProvider} from 'react-router-dom'
 import Login from './components/Logincred/Login.jsx'
 import Signup from './components/Logincred/Signup.jsx'
+import Home from './components/HomePage/Home.jsx'
+import About from './components/HomePage/About.jsx'
 import Contactus from './components/Contact-us/Contactus.jsx'
 
 
@@ -16,8 +18,16 @@ const appRouter = createBrowserRouter([
     element:<App/>,
     children:[
     {
-     path:'/home',
-     element:<App/>
+      path:'/',
+      element:<Home/>
+    },
+    {
+      path:'/home',
+      element:<Home/>, // 
+    },
+    {
+      path:'/about',
+      element:<About/>
     },
     {
       path:'/contactus',
