@@ -6,10 +6,13 @@ import About from './About'
 
 const Home = () => {
   return (
-    <div>
-        <Welcome/>
+    <div className=''>
+      <div className=''>
+        <Welcome />
         <About/>
         <PopJourn/>
+      </div>
+       
     </div>
   )
 }
