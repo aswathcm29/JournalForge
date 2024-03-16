@@ -13,15 +13,18 @@
        font-style: normal;
 }
 
-body {
-  font-family: 'Satoshi-Bold',sans-serif;
-  background-color: rgb(227, 222, 216);
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+
+* {
+  outline: 0;
+  border: 0;
+  box-sizing: border-box;
 }
 
+body {
+  margin: 0;
+  font-family: 'Satoshi-Bold', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
 

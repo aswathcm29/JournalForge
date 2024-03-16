@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import './App.css'
 import {Outlet, useNavigate} from 'react-router-dom'
+import Navbar from './components/Navbar'
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
   return (
     <>
       <div className=''>
+          <Navbar/>
           <Outlet/>
       </div>
     </>
