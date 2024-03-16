@@ -5,10 +5,11 @@ const mongoose = require("mongoose")
 const bcrypt = require('bcrypt');
 const cookieParser = require('cookie-parser');
 const userRoutes = require('./routes/userRoutes');
+const journalRoutes = require('./routes/journalRoutes');
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(cors({ credentials: true, origin: process.env.FRONTEND_URL }));
 app.use(bodyParser.json());
 app.use(cookieParser())
 const saltRounds = 10;
@@ -20,6 +21,7 @@ app.listen(process.env.PORT,()=>{
 })
 
 app.use('/users', userRoutes);
+app.use('/journal', journalRoutes);
 
 try{
     const connect = async() =>{
