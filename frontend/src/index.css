@@ -20,8 +20,19 @@
   box-sizing: border-box;
 }
 
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+ .no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+   scrollbar-width: none; /* Firefox */
+ } 
+
 body {
   margin: 0;
+  background-color: rgb(217, 217, 217);
   font-family: 'Satoshi-Bold', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

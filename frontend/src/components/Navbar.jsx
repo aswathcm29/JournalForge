@@ -11,7 +11,7 @@ const Navbar = () => {
         <header className='flex items-center justify-between border-b-4 border-green-400'>
              <span className='text-5xl'>J<span className='text-4xl mb-2 absolute'>F</span></span>
              <div>
-                <input type='text' className='bg-transparent ring-1 ring-black w-[20rem] h-10 rounded-xl px-3'
+                <input type='text' className='bg-transparent shadow-xl ring-1 ring-gray-400 w-[20rem] h-10 rounded-xl px-3'
                  placeholder='Search'
                 ></input>
              </div>
