@@ -1,10 +1,31 @@
+/* eslint-disable no-unused-vars */
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
+import {createBrowserRouter,RouterProvider} from 'react-router-dom'
+import Login from './components/Logincred/Login.jsx'
+import Signup from './components/Logincred/Signup.jsx'
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+const appRouter = createBrowserRouter([
+  {
+    path:'/',
+    element:<App/>
+  },
+  {
+     path:'/login',
+     element:<Login/>
+  },
+  {
+    path:'/signup',
+    element:<Signup/>
+    }
+])
+
+root.render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={appRouter} />
   </React.StrictMode>,
 )
