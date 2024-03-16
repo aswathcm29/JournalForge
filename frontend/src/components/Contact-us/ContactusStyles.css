@@ -1,0 +1,12 @@
+.input-wrapper{
+    @apply w-[100%] sm:w-[40%] flex flex-col items-start gap-4 text-lg m-5
+}
+
+.input{
+    @apply border-0 border-b-2 border-solid border-b-gray-600 w-full h-10 p-2
+}
+
+.input-double-wrapper{
+    @apply flex justify-around w-full flex-col sm:flex-row
+}
+
