@@ -11,13 +11,13 @@ const login = async (req, res) => {
         console.log(userName,passWord)
         if(userName!="" && passWord!=""){
             const user = await userModel.findOne({userName:userName})
-            
+            //  console.log(user)
             if(!user){
               return  res.status(500).json({error:true,message:"User Not Found"})
             }
             
             const passwordMatch =  await bcrypt.compare(passWord,user.password);
-
+            // console.log(passwordMatch)
             if(passwordMatch){
                const authToken = await generateToken(userName,"user");
                if(authToken === ""){
@@ -33,9 +33,12 @@ const login = async (req, res) => {
         else{
             return res.status(500).json({error:true,message:"Enter UserName and PassWord"})
         }
+
+        
     }
     catch(e){
         return res.status(404).json({error:true,message:e.message})
+
     }
 }
 
