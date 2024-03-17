@@ -2,6 +2,7 @@
 /* eslint-disable no-unused-vars */
 import React, {useEffect, useState} from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 const Search = () =>{
     const [search,setSearch] = useState('')
@@ -66,8 +67,9 @@ const Journals = () => {
         </div>
         </div>
         <div>
-            {filteredData.map((journal, index) => (
-                <div key={index} className={`flex ${(index%2 === 0)?'flex-row':'lg:flex-row-reverse'} sm:p-4 m-8 shadow-md text-[#333]`}>
+            {filteredData.map((journal, index) =>
+             (
+                <Link to={`/${journal._id}`} key={index} className={`flex ${(index%2 === 0)?'flex-row':'lg:flex-row-reverse'} sm:p-4 m-8 shadow-md text-[#333]`}>
                     <img src={journal.image} alt='journal' className='h-[300px] rounded-lg hidden lg:block'/>
                     <div className='sm:px-6 w-full'>
                         <div className='text-3xl w-full flex justify-start'>
@@ -81,7 +83,7 @@ const Journals = () => {
                             {journal.description}
                         </div>
                     </div>
-                </div>
+                </Link>
             ))}
         </div>
     </>
