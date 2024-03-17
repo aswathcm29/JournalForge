@@ -25,11 +25,11 @@ const Navbar = () => {
              <div className='block relative'>
                 <ul className={`
                   lg:flex flex-col lg:flex-row absolute lg:static gap-x-12 text-xl
-                   top-8  ${(isMenuOpen)?'-left-12':'hidden'} px-5 lg:p-0 border-4 border-cyan-600 ring lg:ring-0 overflow-hidden
+                   top-8  ${(isMenuOpen)?'-left-12':'hidden'} px-5 lg:p-0 shadow-lg lg:shadow-none lg: overflow-hidden
                 `}>
-                    <Link to='/home'><li className='p-4 lg:p-0 shadow-sm'>Home</li></Link>
-                    <a href='#about'><li className='p-4 lg:p-0 transition-transform ease-in-out'>About</li></a> 
+                    <Link to='/home'><li className=' p-4 lg:p-0'>Home</li></Link>
                     <Link to='/journals'><li className='p-4 lg:p-0'>Journals</li></Link>
+                    <Link to='/contactus'><li className='p-4 lg:p-0 transition-transform ease-in-out'>Contact us</li></Link> 
                     <Link to='/profile'><li className='p-4 lg:p-0'>Profile</li></Link>
                 </ul>
              </div>
