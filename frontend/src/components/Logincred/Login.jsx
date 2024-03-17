@@ -4,6 +4,8 @@ import {useNavigate} from 'react-router-dom';
 import loginImg from '../../assets/image.png' 
 import React, { useState } from 'react'
 import axios from 'axios'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const LoginForm =()=>{
     const [userName, setUserName] = useState('')
@@ -32,7 +34,7 @@ const LoginForm =()=>{
             }
         }
         catch(err){
-            console.log(err)
+            toast.error("Wrong username or password")
         }
     }
 
@@ -104,6 +106,7 @@ const LoginForm =()=>{
                         <div className="text-center text-gray-900"> Don't have an account?
                         <button className="text-green-500 px-2 hover:underline" onClick={toSignup}>Sign up</button>
                      </div>
+                     <ToastContainer/>
                 </div>
     )
 }

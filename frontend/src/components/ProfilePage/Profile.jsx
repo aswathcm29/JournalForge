@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 
 const Profile = () => {
+    const [userName, setUserName] = useState('');
    const [data, setData] = useState([]);
     useEffect(()=>{
         const fetchData = async () => {
@@ -15,6 +16,13 @@ const Profile = () => {
                 });
                 console.log(response)
                 setData(response.data.message)
+                const user = await axios.get(`${import.meta.env.VITE_BASE_URL}users/getUser`, {
+                    headers: {
+                        Authorization: `Bearer ${document.cookie}`,
+                        'Content-Type': 'application/json'
+                    }
+                })
+                setUserName(user.data.message)
             }
             catch(err){
                 console.log(err)
@@ -33,8 +41,8 @@ const Profile = () => {
                 ></img>
                 </div>
                 <div className='flex flex-col ml-5'>
-                    <p className='text-7xl'>Joe Biden</p>
-                    <div className='py-2'><p className='0'>@JoeBiden16</p></div>
+                    <p className='text-7xl'>{userName}</p>
+                    <div className='py-2'><p className='0'>@{userName}</p></div>
                     <button className='bg-green-400 py-2 rounded-lg'>Logout</button>
                 </div>
             </div>
