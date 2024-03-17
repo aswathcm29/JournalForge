@@ -9,6 +9,7 @@ const LoginForm =()=>{
     const [userName, setUserName] = useState('')
     const [password, setPassword] = useState('')
     const navigate = useNavigate()
+
     const toSignup =()=>{
         navigate('/signup')
     }
@@ -52,7 +53,7 @@ const LoginForm =()=>{
                         <div className="relative">
                         <input
                             placeholder="john@example.com"
-                            className="peer h-10 w-full border-b-2 border-gray-300 text-black bg-transparent placeholder-transparent focus:outline-none focus:border-purple-500"
+                            className="peer h-10 border-solid w-full border-b-2 border-gray-300 text-black bg-transparent placeholder-transparent focus:outline-none focus:border-gray-500"
                             required=""
                             id="email"
                             name="email"
@@ -61,7 +62,7 @@ const LoginForm =()=>{
                             onChange={(e) => setUserName(e.target.value)}
                         />
                         <label
-                            className="absolute left-0 -top-3.5 text-gray-500 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:text-purple-500 peer-focus:text-sm"
+                            className="absolute left-0 -top-3.5 text-gray-500 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:text-green-400 peer-focus:text-sm"
                             htmlFor="email"
                             >User Name</label
                         >
@@ -69,7 +70,7 @@ const LoginForm =()=>{
                         <div className="relative">
                         <input
                             placeholder="Password"
-                            className="peer h-10 w-full border-b-2 border-gray-300 text-black bg-transparent placeholder-transparent focus:outline-none focus:border-purple-500"
+                            className="peer h-10 w-full border-solid border-b-2 border-gray-300 text-black bg-transparent placeholder-transparent focus:outline-none focus:border-gray-500"
                             required=""
                             id="password"
                             name="password"
@@ -78,7 +79,7 @@ const LoginForm =()=>{
                             onChange={(e) => setPassword(e.target.value)}
                         />
                         <label
-                            className="absolute left-0 -top-3.5 text-gray-900 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:text-purple-500 peer-focus:text-sm"
+                            className="absolute left-0 -top-3.5 text-gray-900 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:text-green-400 peer-focus:text-sm"
                             htmlFor="password"
                             >Password</label
                         >
@@ -95,6 +96,7 @@ const LoginForm =()=>{
                         className="w-full py-2 px-4 bg-green-400 hover:bg-green-500 rounded-md shadow-lg text-white font-semibold transition duration-200"
                         type="submit"
                         onClick={(e)=>handleSubmit(e)}
+                        // onClick={(e)=>handleEvents(e)}
                         >
                         Sign In
                         </button>
@@ -111,7 +113,7 @@ const Login = () => {
     <div className=''>
       <div className='flex items-center justify-center rounded-2xl h-[86vh]'>
          <div className='bg-white w-[55rem] h-[35rem] flex rounded-xl'>
-             <div className='w-[50%]'>
+             <div className='w-[50%] hidden md:block'>
                <img src={loginImg}></img>  
              </div>
                <LoginForm/>
@@ -120,5 +122,4 @@ const Login = () => {
     </div>
   )
 }
-
 export default Login
