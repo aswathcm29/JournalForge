@@ -1,23 +1,19 @@
 /* eslint-disable no-unused-vars */
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 
-const Search = () =>{
-    return(
-        <div className='p-4'>
-            <input 
-                type='text' 
-                placeholder='Search the Journal...'
-                className='border-0 border-b-2 border-solid border-b-gray-600 md:min-w-[10rem] w-[50%] h-10 sm:p-2 bg-[#f3f4f5]'
-            />
-            <button className='h-10 w-20 bg-green-400 m-4 rounded-lg'>Search</button>
-        </div>
+const ProfileCard=()=>{
+    return (
+        <>
+            <div className='ring-2 h-[20rem] w-[24rem]'></div>
+        </>
     )
 }
 
-const Journals = () => {
+const Profile = () => {
 
+    
     const [data, setData] = useState([{
-        "image":"https://i.ibb.co/wrWkwNv/pexels-photo-170811.jpg",
+        "image":"https://images.template.net/wp-content/uploads/2017/06/Research-Papers.jpg",
         "title":"How to be a good person",  
         "description":"This is aswath cm at march 16 2024, This is aswath cm at march 16 2024, This is aswath cm at march 16 2024, This is aswath cm at march 16 2024, This is aswath cm at march 16 2024",
         "journalContent":"This is Aswath Cm waiting for his wife living in past at march 16 2022",
@@ -31,20 +27,37 @@ const Journals = () => {
         "author":"muruga",
         "userName":"muruga"
     },{
-        "image":"https://i.ibb.co/wrWkwNv/pexels-photo-170811.jpg",
+        "image":"https://images.template.net/wp-content/uploads/2017/06/Research-Papers.jpg",
         "title":"How to be a good person",  
         "description":"This is aswath cm at march 16 2024, This is aswath cm at march 16 2024, This is aswath cm at march 16 2024, This is aswath cm at march 16 2024, This is aswath cm at march 16 2024",
         "journalContent":"This is Aswath Cm waiting for his wife living in past at march 16 2022",
         "author":"muruga",
         "userName":"muruga"
     }]);
-
   return (
-    <>
-        <div>
-            <Search/>
-        </div>
-        <div>
+    <div className='w-full '>
+        <div className=' flex flex-col gap-x-5 my-5 rounded-xl items-center justify-center'>
+        <div className='w-[95%] rounded-xl'>
+            <div className=' h-[20rem] flex flex-row shadow-xl items-center px-10'>
+                <div className='hidden lg:block rounded-full w-full'>
+                <img src={'https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'}
+                  className='h-[17rem] p-4 rounded-full' 
+                ></img>
+                </div>
+                <div className='flex flex-col justify-center '>
+                    <p className='text-5xl'>Joe Biden</p>
+                    <div className='py-2'><p className=''>@JoeBiden16</p></div>
+                    <div className='text-justify p-4'>
+                    I am dedicated to upholding democratic values, strengthening international partnerships, and promoting diplomacy to navigate global affairs effectively. By prioritizing empathy, integrity, and unity.
+                    </div>
+                    <div className='bg-green-400 py-2 rounded-lg '>Connect</div>
+                </div>
+            </div>
+            <div className='mt-10'>
+            <hr className='h-[0.1rem] mb-[2rem] bg-gray-400'></hr>
+             <p className='text-5xl shadow-lg py-4 rounded-xl bg-green-400'>Your publishes</p>
+            
+             <div className='mt-10 rounded-xl'>
             {data.map((journal, index) => (
                 <div key={index} className={`flex ${(index%2 === 0)?'flex-row':'lg:flex-row-reverse'} sm:p-4 m-8 shadow-md text-[#333]`}>
                     <img src={journal.image} alt='journal' className='h-[300px] rounded-lg hidden lg:block'/>
@@ -63,8 +76,11 @@ const Journals = () => {
                 </div>
             ))}
         </div>
-    </>
+          </div>
+        </div>
+        </div>       
+    </div>
   )
 }
 
-export default Journals
+export default Profile
