@@ -4,6 +4,18 @@ const {journalValidationSchema} = require('../validation/validation');
 const multer  = require('multer')
 const upload = multer({ dest: 'uploads/' })
 
+const getJournalbyId = async (req, res) => {
+    try{
+        const id = req.body.id;
+        console.log(id)
+        const journal = await journalModel.findOne({_id:id});
+        return res.status(200).json({error:false, message:journal});
+    }
+    catch(err){
+        res.status(500).json({error:true, message:err.message});
+    }
+}
+
 const getUserJournal = async (req, res) => {
     try{
         const decoded = jwt.decode(req.headers.authorization.split(" ")[1].split("=")[1]);
@@ -62,4 +74,4 @@ const getJournals = async (req, res) => {
     }
 }
 
-module.exports = { addJournal, getJournals, getUserJournal }
+module.exports = { addJournal, getJournals, getUserJournal, getJournalbyId }
