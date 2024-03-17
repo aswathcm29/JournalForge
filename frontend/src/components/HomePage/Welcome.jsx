@@ -2,8 +2,13 @@
 import React from 'react'
 import homeimg from '../../assets/homepage.png'
 import { TypeAnimation } from 'react-type-animation';
+import { useNavigate } from 'react-router';
 
 const Welcome = () => {
+  const navigate = useNavigate()
+  const toExplore=()=>{
+    navigate('/journals')
+  }
   return (
     <section  className='h-[70vh] mt-20'>
         <div className='h-full flex justify-center items-center relative pb-10 '>
@@ -18,7 +23,7 @@ const Welcome = () => {
                   repeat={Infinity}
               /></p> 
             <p className='py-2'>Join a Global Community of Scholars and Innovators in Pushing the Boundaries of Knowledge</p>
-            <div className='py-10 flex flex-start'><button className='w-[12rem] h-[3.5rem] bg-green-400 rounded-full'>
+            <div className='py-10 flex flex-start'><button className='w-[12rem] h-[3.5rem] bg-green-400 rounded-full' onClick={toExplore}>
                 <span className='text-2xl'>Explore</span>
             </button>
             </div> 

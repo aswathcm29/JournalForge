@@ -1,4 +1,5 @@
-import React from 'react'
+/* eslint-disable no-unused-vars */
+import React, { useState } from 'react'
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css'
 import axios from 'axios'
@@ -7,6 +8,23 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const AddJournals = () => {
+
+  const modules = {
+    toolbar: [
+      [{ 'header': [1, 2, false] }],
+      ['bold', 'italic', 'underline','strike', 'blockquote'],
+      [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
+      ['link', 'image'],
+      ['clean']
+    ],
+  }
+
+  const formats = [
+    'header',
+    'bold', 'italic', 'underline', 'strike', 'blockquote',
+    'list', 'bullet', 'indent',
+    'link', 'image'
+  ]
 
   const navigator = useNavigate()
 
@@ -18,7 +36,7 @@ const AddJournals = () => {
 
   const handleSubmit = async() => {
     try{
-      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/journal/add`, {
+      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}journal/add`, {
         title: title,
         description: description,
         journalContent: journalContent,
@@ -39,22 +57,6 @@ const AddJournals = () => {
     }
   }
 
-  const modules = {
-    toolbar: [
-      [{ 'header': [1, 2, false] }],
-      ['bold', 'italic', 'underline','strike', 'blockquote'],
-      [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
-      ['link', 'image'],
-      ['clean']
-    ],
-  }
-
-  const formats = [
-    'header',
-    'bold', 'italic', 'underline', 'strike', 'blockquote',
-    'list', 'bullet', 'indent',
-    'link', 'image'
-  ]
   return (
     <div className='p-4 '>
       <div className='flex items-center flex-col'>
@@ -74,8 +76,6 @@ const AddJournals = () => {
         <div className='w-full sm:w-[70%] flex flex-col items-start gap-4 text-lg m-2'>
           <div>Journal Content : </div>
           <ReactQuill
-          // value={content}
-              // onChange={(e) => { setContent(e) }}
               modules={modules}
               formats={formats}
               placeholder='Write your Journal Content here...'
@@ -100,6 +100,7 @@ const AddJournals = () => {
           </div>
           <button onClick={()=>{handleSubmit()}}>submit</button>
         </div>
+          <button className='bg-green-400 px-3 py-3 rounded-lg mt-7 text-2xl shadow-xl'>Add Post</button>
       </div>
       <ToastContainer />
     </div>

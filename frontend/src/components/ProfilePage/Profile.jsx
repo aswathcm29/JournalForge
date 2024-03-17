@@ -2,18 +2,8 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 
-const ProfileCard=()=>{
-    return (
-        <>
-            <div className='ring-2 h-[20rem] w-[24rem]'></div>
-        </>
-    )
-}
-
 const Profile = () => {
-
    const [data, setData] = useState([]);
-
     useEffect(()=>{
         const fetchData = async () => {
             try{
@@ -32,29 +22,25 @@ const Profile = () => {
         }
         fetchData();
     },[])
-
   return (
     <div className='w-full '>
-        <div className=' flex flex-col gap-x-5 my-5 rounded-xl items-center justify-center'>
+        <div className=' flex flex-col gap-x-5 my-5 rounded-xl'>
         <div className='w-[95%] rounded-xl'>
-            <div className=' h-[20rem] flex flex-row shadow-xl items-center px-10'>
-                <div className='hidden lg:block rounded-full w-full'>
+            <div className=' h-[20rem] flex flex-row shadow-xl items-center justify-center '>
+                <div className='hidden lg:block rounded-full '>
                 <img src={'https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'}
-                  className='h-[17rem] p-4 rounded-full' 
+                  className='h-[15rem] p-4 rounded-[100%]' 
                 ></img>
                 </div>
-                <div className='flex flex-col justify-center '>
-                    <p className='text-5xl'>Joe Biden</p>
-                    <div className='py-2'><p className=''>@JoeBiden16</p></div>
-                    <div className='text-justify p-4'>
-                    I am dedicated to upholding democratic values, strengthening international partnerships, and promoting diplomacy to navigate global affairs effectively. By prioritizing empathy, integrity, and unity.
-                    </div>
-                    <div className='bg-green-400 py-2 rounded-lg '>Connect</div>
+                <div className='flex flex-col ml-5'>
+                    <p className='text-7xl'>Joe Biden</p>
+                    <div className='py-2'><p className='0'>@JoeBiden16</p></div>
+                    <button className='bg-green-400 py-2 rounded-lg'>Logout</button>
                 </div>
             </div>
             <div className='mt-10'>
             <hr className='h-[0.1rem] mb-[2rem] bg-gray-400'></hr>
-             <p className='text-5xl shadow-lg py-4 rounded-xl bg-green-400'>Your publishes</p>
+             <p className='text-5xl shadow-lg py-4 rounded-xl bg-green-400'>Your Articles</p>
             
              <div className='mt-10 rounded-xl'>
             {data.map((journal, index) => (
@@ -81,5 +67,4 @@ const Profile = () => {
     </div>
   )
 }
-
 export default Profile
