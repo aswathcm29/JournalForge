@@ -4,7 +4,6 @@ const Cookie = require('js-cookie')
 const checkUser = async(req, res, next) =>{
     try{
         console.log(req.headers.authorization)
-        // const token = Cookie.get();
         if(req.headers.authorization === undefined){
             return res.status(401).json({error:true, message:"invalid user"});
         }
