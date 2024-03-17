@@ -48,7 +48,10 @@ const appRouter = createBrowserRouter([
     {
       path:'/profile',
       element:<Profile/>
-    }
+    },{
+      path:'/:journalid',
+      element:<JournalView/>
+    },
   ]
 },
   {
@@ -58,10 +61,6 @@ const appRouter = createBrowserRouter([
   {
     path:'/signup',
     element:<Signup/>
-    },
-    {
-      path:'/:journalid',
-      element:<JournalView/>
     },
 ])
 
