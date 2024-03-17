@@ -23,7 +23,7 @@ const SignupForm =()=>{
       return
     }
     try{
-      const response = await axios.post('http://localhost:5000/users/signup', {
+      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/users/signup`, {
         userName, email, password
       }, {
         headers: {

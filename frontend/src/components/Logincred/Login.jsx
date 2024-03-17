@@ -17,7 +17,7 @@ const LoginForm =()=>{
     const handleSubmit = async(e) =>{
         e.preventDefault()
         try{
-            const response = await axios.post('http://localhost:5000/users/login', {
+            const response = await axios.post(`${import.meta.env.VITE_BASE_URL}users/login`, {
             userName, password
             }, {
                 headers: {
