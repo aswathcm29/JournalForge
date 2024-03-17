@@ -5,11 +5,11 @@ import axios from 'axios'
 
 const JournalCard = (props) => {
     return (
-      <div className='py-10'>
+      <div className='py-10 '>
         <div className="relative flex w-80 flex-col rounded-xl bg-white bg-clip-border text-black shadow-md">
           <img src={props.ima} className="relative mx-4 -mt-6 h-40 overflow-hidden rounded-xl bg-blue-gray-500 bg-clip-border text-white shadow-lg shadow-blue-gray-500/40 bg-green-400" />
           <div className="p-6">
-            <h5 className="mb-2 block  text-xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
+            <h5 className="mb-2 block  text-xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased h-[5rem] overflow-hidden">
               {props.title}
             </h5>
           </div>

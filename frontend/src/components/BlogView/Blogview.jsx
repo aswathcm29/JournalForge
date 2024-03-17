@@ -4,7 +4,7 @@ import { Link, useParams } from 'react-router-dom'
 
 const Blogview = () => {
     const [blog , setBlogs] = useState([{
-        blogTitle:'Hello world',
+        'blogTitle':'Hello world',
         description:'Built like a spreadsheet, project tables give you a live canvas to filter, sort, and group issues and pull requests. Tailor them to your needs with custom fields and saved views.',
     }]);
     // const [userName, setUserName] = useState('');
@@ -37,8 +37,8 @@ const Blogview = () => {
   return (
     <div className='w-[100%] flex justify-center'>
       <div className='text-[#333] sm:w-[90%] flex flex-col justify-center items-center mb-5 py-10 shadow-xl rounded-md'>
-        <div className=' text-3xl sm:text-5xl sm:w-[90%] mt-10 sm:px-5'>
-          {blog.blogTitle}
+        <div className=' text-5xl sm:text-5xl sm:w-[90%] mt-10 sm:px-5'>
+          {blog.blogTitle   }
         </div>
         <div className='flex flex-col sm:flex-row sm:w-[90%] sm:pt-10 sm:pb-10 justify-center items-center gap-5'>
           <div className='w-[90%] mt-5 sm:w-[40%] sm:mt-0'>

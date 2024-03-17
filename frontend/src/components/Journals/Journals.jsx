@@ -22,11 +22,11 @@ const Search = () =>{
 const Journals = () => {
     const [data, setData] = useState([]);
     const [search,setSearch] = useState('')
-    const [filteredData,setfilteredData] = useState([])
+    const [filteredData,setfilteredData] = useState(data)
     const handleSearch = () => {
         const value = search.toLowerCase();
-        if(value === ''){
-            setfilteredData(data)
+        if(value === ""){
+            setfilteredData(data);
             return
         }
         const filtered = data.filter(
@@ -40,18 +40,17 @@ const Journals = () => {
       };
     useEffect(()=>{
         const fetchData = async () => {
-            const response = await axios.get(`${import.meta.env.VITE_BASE_URL}journal/getJournals`, {
-                headers: {
-                    'Authorization': `Bearer ${document.cookie}`,
-                    'Content-Type': 'application/json'
-                }
-            });
+            const response = await axios.get('http://localhost:5000/journal/getJournals');
             setData(response.data.journals);
             console.log(response.data.journals);
-        
         }
         fetchData();
     },[])
+
+    useEffect(()=>{
+        setfilteredData(data)
+    },[data])
+
   return (
     <>
         <div>
@@ -76,7 +75,7 @@ const Journals = () => {
                         </div>
                         <div className='flex justify-between mt-4'>
                             <div>@{journal.author}</div>
-                            <div>{`Date : 11-11-1111`}</div>
+                            <div>{(journal.date).split("T")[0]}</div>
                         </div>
                         <div className='w-auto h-[70%] flex justify-center items-center text-xl text-left'>
                             {journal.description}
