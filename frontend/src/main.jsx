@@ -10,6 +10,7 @@ import Home from './components/HomePage/Home.jsx'
 import About from './components/HomePage/About.jsx'
 import Contactus from './components/Contact-us/Contactus.jsx'
 import Journals from './components/Journals/Journals.jsx'
+import AddJournals from './components/Journals/AddJournals.jsx'
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -37,6 +38,10 @@ const appRouter = createBrowserRouter([
     {
       path:'/explore',
       element: <Journals/>
+    },
+    {
+      path:'/addJournals',
+      element: <AddJournals/>
     }
   ]
 },
