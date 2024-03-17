@@ -12,6 +12,7 @@ import Contactus from './components/Contact-us/Contactus.jsx'
 import Profile from './components/ProfilePage/Profile.jsx'
 import Journals from './components/Journals/Journals.jsx'
 import AddJournals from './components/Journals/AddJournals.jsx'
+import Blogview from './components/BlogView/Blogview.jsx'
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -57,6 +58,10 @@ const appRouter = createBrowserRouter([
   {
     path:'/signup',
     element:<Signup/>
+    },
+    {
+      path:'/blogview',
+      element:<Blogview/>
     }
 ])
 

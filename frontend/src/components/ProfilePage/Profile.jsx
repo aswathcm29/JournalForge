@@ -10,8 +10,6 @@ const ProfileCard=()=>{
 }
 
 const Profile = () => {
-
-    
     const [data, setData] = useState([{
         "image":"https://images.template.net/wp-content/uploads/2017/06/Research-Papers.jpg",
         "title":"How to be a good person",  
@@ -50,12 +48,12 @@ const Profile = () => {
                     <div className='text-justify p-4'>
                     I am dedicated to upholding democratic values, strengthening international partnerships, and promoting diplomacy to navigate global affairs effectively. By prioritizing empathy, integrity, and unity.
                     </div>
-                    <div className='bg-green-400 py-2 rounded-lg '>Connect</div>
+                    <div className='bg-green-400 py-2 rounded-lg '>View Articles</div>
                 </div>
             </div>
             <div className='mt-10'>
             <hr className='h-[0.1rem] mb-[2rem] bg-gray-400'></hr>
-             <p className='text-5xl shadow-lg py-4 rounded-xl bg-green-400'>Your publishes</p>
+             <p className='text-5xl shadow-lg py-4 rounded-xl bg-green-400'>Your Articles</p>
             
              <div className='mt-10 rounded-xl'>
             {data.map((journal, index) => (
@@ -82,5 +80,4 @@ const Profile = () => {
     </div>
   )
 }
-
 export default Profile

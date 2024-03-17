@@ -1,8 +1,10 @@
-import React from 'react'
+/* eslint-disable no-unused-vars */
+import React, { useState } from 'react'
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css'
 
 const AddJournals = () => {
+  const [content,setContent]=useState('')
   const modules = {
     toolbar: [
       [{ 'header': [1, 2, false] }],
@@ -34,8 +36,8 @@ const AddJournals = () => {
         <div className='w-full sm:w-[70%] flex flex-col items-start gap-4 text-lg m-2'>
           <div>Journal Content : </div>
           <ReactQuill
-          // value={content}
-              // onChange={(e) => { setContent(e) }}
+              value={content}
+              onChange={(e) => { setContent(e) }}
               modules={modules}
               formats={formats}
               placeholder='Write your Journal Content here...'
@@ -52,6 +54,7 @@ const AddJournals = () => {
             <input type='file' className='w-full p-2 border-2 border-gray-300 rounded-lg  ' placeholder='Enter your Title here...' />
           </div>
         </div>
+          <button className='bg-green-400 px-3 py-3 rounded-lg mt-7 text-2xl shadow-xl'>Add Post</button>
       </div>
     </div>
   )
