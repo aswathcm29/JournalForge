@@ -34,21 +34,18 @@ const Profile = () => {
     }]);
   return (
     <div className='w-full '>
-        <div className=' flex flex-col gap-x-5 my-5 rounded-xl items-center justify-center'>
+        <div className=' flex flex-col gap-x-5 my-5 rounded-xl'>
         <div className='w-[95%] rounded-xl'>
-            <div className=' h-[20rem] flex flex-row shadow-xl items-center px-10'>
-                <div className='hidden lg:block rounded-full w-full'>
+            <div className=' h-[20rem] flex flex-row shadow-xl items-center justify-center '>
+                <div className='hidden lg:block rounded-full '>
                 <img src={'https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'}
-                  className='h-[17rem] p-4 rounded-full' 
+                  className='h-[15rem] p-4 rounded-[100%]' 
                 ></img>
                 </div>
-                <div className='flex flex-col justify-center '>
-                    <p className='text-5xl'>Joe Biden</p>
-                    <div className='py-2'><p className=''>@JoeBiden16</p></div>
-                    <div className='text-justify p-4'>
-                    I am dedicated to upholding democratic values, strengthening international partnerships, and promoting diplomacy to navigate global affairs effectively. By prioritizing empathy, integrity, and unity.
-                    </div>
-                    <div className='bg-green-400 py-2 rounded-lg '>View Articles</div>
+                <div className='flex flex-col ml-5'>
+                    <p className='text-7xl'>Joe Biden</p>
+                    <div className='py-2'><p className='0'>@JoeBiden16</p></div>
+                    <button className='bg-green-400 py-2 rounded-lg'>Logout</button>
                 </div>
             </div>
             <div className='mt-10'>
