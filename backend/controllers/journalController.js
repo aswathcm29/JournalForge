@@ -1,3 +1,4 @@
+const { decode } = require('jsonwebtoken');
 const {journalModel} = require('../models/journalSchema');
 const {journalValidationSchema} = require('../validation/validation');
 const multer  = require('multer')
@@ -10,8 +11,10 @@ const addJournal = async (req, res) => {
         const journalContent = req.body.journalContent;
         const image = req.body.image;
         const author = req.body.author;
-        req.body.userName = "muruga"
+        const decoded = jwt.decode(req.headers.authorization.split(" ")[1]);
+        req.body.userName = decoded.userName
         const userName = req.body.userName;
+        console.log(userName)
 
         const {error, value} = journalValidationSchema.validate(req.body);
         if(error){
