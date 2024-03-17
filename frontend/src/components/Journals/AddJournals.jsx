@@ -36,7 +36,7 @@ const AddJournals = () => {
 
   const handleSubmit = async() => {
     try{
-      const response = await axios.post('http://localhost:5000/journal/add', {
+      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/journal/add`, {
         title: title,
         description: description,
         journalContent: journalContent,
@@ -44,6 +44,7 @@ const AddJournals = () => {
         author: author
     }, {
         headers: {
+            'Authorization': `Bearer ${document.cookie}`,
             'Content-Type': 'application/json'
         }
     })

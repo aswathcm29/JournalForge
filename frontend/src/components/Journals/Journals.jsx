@@ -40,7 +40,12 @@ const Journals = () => {
       };
     useEffect(()=>{
         const fetchData = async () => {
-            const response = await axios.get('http://localhost:5000/journal/getJournals');
+            const response = await axios.get(`${import.meta.env.VITE_BASE_URL}journal/getJournals`, {
+                headers: {
+                    'Authorization': `Bearer ${document.cookie}`,
+                    'Content-Type': 'application/json'
+                }
+            });
             setData(response.data.journals);
             console.log(response.data.journals);
         
