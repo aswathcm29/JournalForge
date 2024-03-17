@@ -1,8 +1,10 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
+    const navigator = useNavigate()
     const [userName, setUserName] = useState('');
    const [data, setData] = useState([]);
     useEffect(()=>{
@@ -43,7 +45,10 @@ const Profile = () => {
                 <div className='flex flex-col ml-5'>
                     <p className='text-7xl'>{userName}</p>
                     <div className='py-2'><p className='0'>@{userName}</p></div>
-                    <button className='bg-green-400 py-2 rounded-lg'>Logout</button>
+                    <button className='bg-green-400 py-2 rounded-lg' onClick={()=>{
+                        document.cookie = "journal_token='';max-age=0"
+                        navigator('/login')
+                    }}>Logout</button>
                 </div>
             </div>
             <div className='mt-10'>
