@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
 
 const ProfileCard=()=>{
     return (
@@ -11,29 +12,27 @@ const ProfileCard=()=>{
 
 const Profile = () => {
 
-    
-    const [data, setData] = useState([{
-        "image":"https://images.template.net/wp-content/uploads/2017/06/Research-Papers.jpg",
-        "title":"How to be a good person",  
-        "description":"This is aswath cm at march 16 2024, This is aswath cm at march 16 2024, This is aswath cm at march 16 2024, This is aswath cm at march 16 2024, This is aswath cm at march 16 2024",
-        "journalContent":"This is Aswath Cm waiting for his wife living in past at march 16 2022",
-        "author":"muruga",
-        "userName":"muruga"
-    },{
-        "image":"https://i.ibb.co/wrWkwNv/pexels-photo-170811.jpg",
-        "title":"How to be a good person",  
-        "description":"This is aswath cm at march 16 2024, This is aswath cm at march 16 2024, This is aswath cm at march 16 2024, This is aswath cm at march 16 2024, This is aswath cm at march 16 2024",
-        "journalContent":"This is Aswath Cm waiting for his wife living in past at march 16 2022",
-        "author":"muruga",
-        "userName":"muruga"
-    },{
-        "image":"https://images.template.net/wp-content/uploads/2017/06/Research-Papers.jpg",
-        "title":"How to be a good person",  
-        "description":"This is aswath cm at march 16 2024, This is aswath cm at march 16 2024, This is aswath cm at march 16 2024, This is aswath cm at march 16 2024, This is aswath cm at march 16 2024",
-        "journalContent":"This is Aswath Cm waiting for his wife living in past at march 16 2022",
-        "author":"muruga",
-        "userName":"muruga"
-    }]);
+   const [data, setData] = useState([]);
+
+    useEffect(()=>{
+        const fetchData = async () => {
+            try{
+                const response = await axios.get(`${import.meta.env.VITE_BASE_URL}journal/getUserJournal`, {
+                    headers: {
+                        Authorization: `Bearer ${document.cookie}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+                console.log(response)
+                setData(response.data.message)
+            }
+            catch(err){
+                console.log(err)
+            }
+        }
+        fetchData();
+    },[])
+
   return (
     <div className='w-full '>
         <div className=' flex flex-col gap-x-5 my-5 rounded-xl items-center justify-center'>
