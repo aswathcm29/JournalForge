@@ -9,6 +9,7 @@ import Signup from './components/Logincred/Signup.jsx'
 import Home from './components/HomePage/Home.jsx'
 import About from './components/HomePage/About.jsx'
 import Contactus from './components/Contact-us/Contactus.jsx'
+import Profile from './components/ProfilePage/Profile.jsx'
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -32,6 +33,11 @@ const appRouter = createBrowserRouter([
     {
       path:'/contactus',
       element: <Contactus/>
+    },
+    {
+      path:'/profile',
+      element:<Profile/>
+
     }
   ]
 },
