@@ -41,7 +41,7 @@ const Journals = () => {
       };
     useEffect(()=>{
         const fetchData = async () => {
-            const response = await axios.get('http://localhost:5000/journal/getJournals');
+            const response = await axios.get(`${import.meta.env.VITE_BASE_URL}journal/getJournals`);
             setData(response.data.journals);
             console.log(response.data.journals);
         }
