@@ -22,9 +22,13 @@ const Search = () =>{
 const Journals = () => {
     const [data, setData] = useState([]);
     const [search,setSearch] = useState('')
-    const [filteredData,setfilteredData] = useState(data)
+    const [filteredData,setfilteredData] = useState([])
     const handleSearch = () => {
         const value = search.toLowerCase();
+        if(value === ''){
+            setfilteredData(data)
+            return
+        }
         const filtered = data.filter(
           item =>
             item.title.toLowerCase().includes(value) ||
@@ -34,17 +38,12 @@ const Journals = () => {
         setfilteredData(filtered);
         console.log(filteredData)
       };
-    
-      useEffect(() => {
-        handleSearch();
-      },[]);
-
-   
-
     useEffect(()=>{
         const fetchData = async () => {
             const response = await axios.get('http://localhost:5000/journal/getJournals');
             setData(response.data.journals);
+            console.log(response.data.journals);
+        
         }
         fetchData();
     },[])
@@ -84,5 +83,4 @@ const Journals = () => {
     </>
   )
 }
-
 export default Journals
