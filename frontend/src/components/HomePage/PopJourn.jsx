@@ -2,6 +2,7 @@
 /* eslint-disable no-unused-vars */
 import React,{useState, useEffect} from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom';
 
 const JournalCard = (props) => {
     return (
@@ -45,7 +46,7 @@ const JournalCard = (props) => {
               <div className='w-[90%] h-[90%] overflow-x-auto flex gap-x-10 no-scrollbar'>
                 {
                   data.map((item, index) => {
-                    return <JournalCard key={index} title={item.title} ima={item.image} />
+                    return (<Link to={`/${item._id}`} key={index}><JournalCard key={index} title={item.title} ima={item.image} /></Link>)
                   })
                 }
                 {/* <JournalCard title='Interdisciplinary Studies' ima='https://th.bing.com/th/id/OIP.CgCAFeSDIFIQ6YyGbChH5AHaIM?w=925&h=1024&rs=1&pid=ImgDetMain' />
