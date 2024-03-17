@@ -8,7 +8,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const AddJournals = () => {
-  const [content,setContent]=useState('')
+
   const modules = {
     toolbar: [
       [{ 'header': [1, 2, false] }],
@@ -25,6 +25,37 @@ const AddJournals = () => {
     'list', 'bullet', 'indent',
     'link', 'image'
   ]
+
+  const navigator = useNavigate()
+
+  const [title , setTitle] = React.useState('')
+  const [description , setDescription] = React.useState('')
+  const [journalContent , setJournalContent] = React.useState('')
+  const [author , setAuthor] = React.useState('')
+  const [image , setImage] = React.useState("")
+
+  const handleSubmit = async() => {
+    try{
+      const response = await axios.post('http://localhost:5000/journal/add', {
+        title: title,
+        description: description,
+        journalContent: journalContent,
+        image: image,
+        author: author
+    }, {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    if(response.status === 200){
+      navigator('/home')
+    }
+    }
+    catch(err){
+      toast.error("incomplete data")
+    }
+  }
+
   return (
     <div className='p-4 '>
       <div className='flex items-center flex-col'>
@@ -44,8 +75,6 @@ const AddJournals = () => {
         <div className='w-full sm:w-[70%] flex flex-col items-start gap-4 text-lg m-2'>
           <div>Journal Content : </div>
           <ReactQuill
-              value={content}
-              onChange={(e) => { setContent(e) }}
               modules={modules}
               formats={formats}
               placeholder='Write your Journal Content here...'
