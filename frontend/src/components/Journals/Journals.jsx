@@ -20,6 +20,7 @@ const Search = () =>{
 }
 
 const Journals = () => {
+    const [data, setData] = useState([]);
     const [search,setSearch] = useState('')
     const [filteredData,setfilteredData] = useState(data)
     const handleSearch = () => {
@@ -38,7 +39,7 @@ const Journals = () => {
         handleSearch();
       },[]);
 
-    const [data, setData] = useState([]);
+   
 
     useEffect(()=>{
         const fetchData = async () => {
@@ -46,7 +47,7 @@ const Journals = () => {
             setData(response.data.journals);
         }
         fetchData();
-    })
+    },[])
   return (
     <>
         <div>
