@@ -1,12 +1,25 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import axios from 'axios'
+
 
 const JournalView = () => {
-    const [blog , setBlogs] = useState({
-        'blogTitle':'Hello world',
-        description:'Built like a spreadsheet, project tables give you a live canvas to filter, sort, and group issues and pull requests. Tailor them to your needs with custom fields and saved views.',
-    });
+  const {journalid} = useParams();
+    const [blog , setBlogs] = useState({});
+
+    useEffect(()=>{
+      console.log(journalid)
+      const fetchJournal = async () =>{
+        // console.log(`${import.meta.env.VITE_BASE_URL}/journal/getJournalbyId`)
+        const response = await axios.post(`${import.meta.env.VITE_BASE_URL}journal/getJournalbyId`,{id:journalid},
+          {headers:{"request-JournalView":"JournalView/request"}})
+          console.log("thera",response, "id", journalid);
+          setBlogs(response.data.message)
+      }
+      fetchJournal();
+    },[journalid])
+
     // const [userName, setUserName] = useState('');
     // const {blogid} = useParams();
     // useEffect(()=>{
@@ -43,7 +56,7 @@ const JournalView = () => {
         <div className='flex flex-col sm:flex-row sm:w-[90%] sm:pt-10 sm:pb-10 justify-center items-center gap-5'>
           <div className='w-[90%] mt-5 sm:w-[40%] sm:mt-0'>
               
-              {/* <img src={'http://localhost:5000/'+blog.blogImg} className=' rounded-md'></img> */}
+              <img src={blog.image} className=' rounded-md'></img>
           </div>
           <div className=' flex flex-col w-[90%] gap-5 sm:w-[60%] py-5'>
               <div className=' text-l sm:text-3xl'>{blog.description}</div>
@@ -55,8 +68,8 @@ const JournalView = () => {
               </div>
           </div>
         </div>
-        <div className='w-[90%]'>
-            <div dangerouslySetInnerHTML={{__html:blog.content}}></div>
+        <div className='w-[90%] text-left'>
+            <div dangerouslySetInnerHTML={{__html:blog.journalContent}}></div>
         </div>
       </div>
     </div>
