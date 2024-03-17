@@ -37,12 +37,16 @@ const appRouter = createBrowserRouter([
       element: <Contactus/>
     },
     {
-      path:'/explore',
+      path:'/journals',
       element: <Journals/>
     },
     {
       path:'/addJournals',
       element: <AddJournals/>
+    },
+    {
+      path:'/profile',
+      element:<Profile/>
     }
   ]
 },
