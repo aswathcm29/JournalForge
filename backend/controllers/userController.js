@@ -2,6 +2,20 @@ const {userModel} = require('../models/userSchema')
 const saltRounds = 10;
 const bcrypt = require('bcrypt');
 const { generateToken } = require('../utils/Token');
+const jwt = require('jsonwebtoken');
+// const { response } = require('express');
+const getUser = (req, res) =>{
+    try{
+        console.log(req.headers.authorization)
+        const decoded = jwt.decode((req.headers.authorization.split(" ")[1]).split("=")[1]);
+        console.log("fuck",decoded)
+        const userName = decoded.userName;
+        res.status(200).json({error:true, message:userName})
+    }
+    catch(err){
+        res.status(500).json({error:true,message:err.message})
+    }
+}
 
 const login = async (req, res) => {
     console.log("check")
@@ -77,4 +91,4 @@ const signup = async(req, res) =>{
     }
 }
 
-module.exports = {signup, login}
+module.exports = {signup, login, getUser}
