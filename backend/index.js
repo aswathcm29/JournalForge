@@ -6,6 +6,8 @@ const bcrypt = require('bcrypt');
 const cookieParser = require('cookie-parser');
 const userRoutes = require('./routes/userRoutes');
 const journalRoutes = require('./routes/journalRoutes');
+const multer  = require('multer')
+const upload = multer({ dest: 'uploads/' })
 
 const app = express();
 app.use(express.json());

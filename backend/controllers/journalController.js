@@ -1,5 +1,7 @@
 const {journalModel} = require('../models/journalSchema');
 const {journalValidationSchema} = require('../validation/validation');
+const multer  = require('multer')
+const upload = multer({ dest: 'uploads/' })
 
 const addJournal = async (req, res) => {
     try{
@@ -8,6 +10,7 @@ const addJournal = async (req, res) => {
         const journalContent = req.body.journalContent;
         const image = req.body.image;
         const author = req.body.author;
+        req.body.userName = "muruga"
         const userName = req.body.userName;
 
         const {error, value} = journalValidationSchema.validate(req.body);
