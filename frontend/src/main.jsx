@@ -6,6 +6,13 @@ import './index.css'
 import {createBrowserRouter,RouterProvider} from 'react-router-dom'
 import Login from './components/Logincred/Login.jsx'
 import Signup from './components/Logincred/Signup.jsx'
+import Home from './components/HomePage/Home.jsx'
+import About from './components/HomePage/About.jsx'
+import Contactus from './components/Contact-us/Contactus.jsx'
+import Profile from './components/ProfilePage/Profile.jsx'
+import Journals from './components/Journals/Journals.jsx'
+import AddJournals from './components/Journals/AddJournals.jsx'
+import JournalView from './components/BlogView/Blogview.jsx'
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -15,9 +22,33 @@ const appRouter = createBrowserRouter([
     element:<App/>,
     children:[
     {
-     path:'/home',
-     element:<App/>
+      path:'/',
+      element:<Home/>
     },
+    {
+      path:'/home',
+      element:<Home/>, 
+    },
+    {
+      path:'/about',
+      element:<About/>
+    },
+    {
+      path:'/contactus',
+      element: <Contactus/>
+    },
+    {
+      path:'/journals',
+      element: <Journals/>
+    },
+    {
+      path:'/addJournals',
+      element: <AddJournals/>
+    },
+    {
+      path:'/profile',
+      element:<Profile/>
+    }
   ]
 },
   {
@@ -27,7 +58,11 @@ const appRouter = createBrowserRouter([
   {
     path:'/signup',
     element:<Signup/>
-    }
+    },
+    {
+      path:'/:journalid',
+      element:<JournalView/>
+    },
 ])
 
 root.render(

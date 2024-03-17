@@ -1,7 +1,9 @@
+/* eslint-disable no-unused-vars */
 import { useEffect } from 'react'
 import './App.css'
 import {Outlet, useNavigate} from 'react-router-dom'
 import Navbar from './components/Navbar'
+import Footer from './components/Footer'
 
 function App() {
 
@@ -19,6 +21,7 @@ function App() {
       <div className=''>
           <Navbar/>
           <Outlet/>
+          <Footer/>
       </div>
     </>
   )
