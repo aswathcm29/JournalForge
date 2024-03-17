@@ -22,6 +22,10 @@ app.listen(process.env.PORT,()=>{
     console.log(`server running on port ${process.env.PORT}`);
 })
 
+app.get('/',(req, res)=>{
+    res.status(200).json("hello world")
+})
+
 app.use('/users', userRoutes);
 app.use('/journal', journalRoutes);
 
