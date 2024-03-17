@@ -1,4 +1,5 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
+import axios from 'axios'
 
 const Search = () =>{
     return(
@@ -15,28 +16,15 @@ const Search = () =>{
 
 const Journals = () => {
 
-    const [data, setData] = useState([{
-        "image":"https://i.ibb.co/wrWkwNv/pexels-photo-170811.jpg",
-        "title":"How to be a good person",  
-        "description":"This is aswath cm at march 16 2024, This is aswath cm at march 16 2024, This is aswath cm at march 16 2024, This is aswath cm at march 16 2024, This is aswath cm at march 16 2024",
-        "journalContent":"This is Aswath Cm waiting for his wife living in past at march 16 2022",
-        "author":"muruga",
-        "userName":"muruga"
-    },{
-        "image":"https://i.ibb.co/wrWkwNv/pexels-photo-170811.jpg",
-        "title":"How to be a good person",  
-        "description":"This is aswath cm at march 16 2024, This is aswath cm at march 16 2024, This is aswath cm at march 16 2024, This is aswath cm at march 16 2024, This is aswath cm at march 16 2024",
-        "journalContent":"This is Aswath Cm waiting for his wife living in past at march 16 2022",
-        "author":"muruga",
-        "userName":"muruga"
-    },{
-        "image":"https://i.ibb.co/wrWkwNv/pexels-photo-170811.jpg",
-        "title":"How to be a good person",  
-        "description":"This is aswath cm at march 16 2024, This is aswath cm at march 16 2024, This is aswath cm at march 16 2024, This is aswath cm at march 16 2024, This is aswath cm at march 16 2024",
-        "journalContent":"This is Aswath Cm waiting for his wife living in past at march 16 2022",
-        "author":"muruga",
-        "userName":"muruga"
-    }]);
+    const [data, setData] = useState([]);
+
+    useEffect(()=>{
+        const fetchData = async () => {
+            const response = await axios.get('http://localhost:5000/journal/getJournals');
+            setData(response.data.journals);
+        }
+        fetchData();
+    })
 
   return (
     <>

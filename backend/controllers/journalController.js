@@ -28,4 +28,14 @@ const addJournal = async (req, res) => {
     }
 }
 
-module.exports = { addJournal }
+const getJournals = async (req, res) => {
+    try{
+        const journals = await journalModel.find({});
+        return res.status(200).json({error:false, journals});
+    }
+    catch(e){
+        return res.status(500).json({error:true, message:e.message});
+    }
+}
+
+module.exports = { addJournal, getJournals }
