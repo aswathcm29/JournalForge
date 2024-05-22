@@ -11,8 +11,8 @@ function App() {
 
   useEffect(()=>{
     const token = document.cookie.split('=')[0];
-    if(token !== 'journal_token'){
-      navigate('/login')
+    if(token){
+      navigate('/')
     }
   },[navigate])
 

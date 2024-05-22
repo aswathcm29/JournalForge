@@ -3,35 +3,60 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 
+
 const Profile = () => {
     const navigator = useNavigate()
     const [userName, setUserName] = useState('');
-   const [data, setData] = useState([]);
+    const [data, setData] = useState([]);
+
+   function getCookieValue(name) {
+    const cookies = document.cookie.split(';');
+    for (let cookie of cookies) {
+        cookie = cookie.trim();
+        if (cookie.startsWith(name + '=')) {
+            return cookie.substring(name.length + 1);
+        }
+    }
+    return null;
+}
+
     useEffect(()=>{
+        const token = getCookieValue('journal_token');
         const fetchData = async () => {
             try{
                 const response = await axios.get(`${import.meta.env.VITE_BASE_URL}journal/getUserJournal`, {
                     headers: {
-                        Authorization: `Bearer ${document.cookie}`,
+                        'Authorization': `Bearer ${token}`,
                         'Content-Type': 'application/json'
                     }
                 });
                 console.log(response)
                 setData(response.data.message)
-                const user = await axios.get(`${import.meta.env.VITE_BASE_URL}users/getUser`, {
-                    headers: {
-                        Authorization: `Bearer ${document.cookie}`,
-                        'Content-Type': 'application/json'
-                    }
-                })
-                setUserName(user.data.message)
             }
             catch(err){
                 console.log(err)
             }
         }
         fetchData();
+        fetchUser();
     },[])
+
+  const fetchUser = async()=>{
+    const token = getCookieValue('journal_token');
+    try{
+        const res = await axios.get(`${import.meta.env.VITE_BASE_URL}users/getUser`,{
+            headers:{
+              'Authorization' : `Bearer ${token}`,
+              'Content-Type':'application/json'
+            }
+        })
+        setUserName(res.data.message.username)
+    }catch(err){
+        console.log(err)
+    }
+  }
+  
+
   return (
     <div className='w-full '>
         <div className=' flex flex-col gap-x-5 my-5 rounded-xl'>

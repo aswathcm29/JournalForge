@@ -24,6 +24,18 @@ const Journals = () => {
     const [data, setData] = useState([]);
     const [search,setSearch] = useState('')
     const [filteredData,setfilteredData] = useState(data)
+
+    function getCookieValue(name) {
+        const cookies = document.cookie.split(';');
+        for (let cookie of cookies) {
+            cookie = cookie.trim();
+            if (cookie.startsWith(name + '=')) {
+                return cookie.substring(name.length + 1);
+            }
+        }
+        return null;
+    }
+
     const handleSearch = () => {
         const value = search.toLowerCase();
         if(value === ""){
@@ -41,7 +53,13 @@ const Journals = () => {
       };
     useEffect(()=>{
         const fetchData = async () => {
-            const response = await axios.get(`${import.meta.env.VITE_BASE_URL}journal/getJournals`);
+            const token  = getCookieValue('journal_token')
+            const response = await axios.get(`${import.meta.env.VITE_BASE_URL}journal/getJournals`,{
+                   headers:{
+                    'Authorization':`Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                   }
+            });
             setData(response.data.journals);
             console.log(response.data.journals);
         }

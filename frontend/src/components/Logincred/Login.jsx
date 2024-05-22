@@ -26,11 +26,10 @@ const LoginForm =()=>{
                     'Content-Type': 'application/json'
                 }
             })
-            console.log(response)
             if(response.status === 200){
                 document.cookie = `journal_token=${response.data.message.token}`
-                console.log(document.cookie)
-                navigate('/');
+                console.log('Login Successful')
+                navigate('/')
             }
         }
         catch(err){
