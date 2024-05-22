@@ -7,14 +7,27 @@ import axios from 'axios'
 const JournalView = () => {
   const {journalid} = useParams();
     const [blog , setBlogs] = useState({});
+    function getCookieValue(name) {
+      const cookies = document.cookie.split(';');
+      for (let cookie of cookies) {
+          cookie = cookie.trim();
+          if (cookie.startsWith(name + '=')) {
+              return cookie.substring(name.length + 1);
+          }
+      }
+      return null;
+  }
 
     useEffect(()=>{
-      console.log(journalid)
       const fetchJournal = async () =>{
-        // console.log(`${import.meta.env.VITE_BASE_URL}/journal/getJournalbyId`)
+        const Token = getCookieValue('journal_token')
         const response = await axios.post(`${import.meta.env.VITE_BASE_URL}journal/getJournalbyId`,{id:journalid},
-          {headers:{"request-JournalView":"JournalView/request"}})
-          console.log("thera",response, "id", journalid);
+          {
+            headers:{
+            'Content-Type':'application/json',
+            'Authorization': `Bearer ${Token}`
+          } 
+          })
           setBlogs(response.data.message)
       }
       fetchJournal();

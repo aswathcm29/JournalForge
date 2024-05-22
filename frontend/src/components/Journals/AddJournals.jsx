@@ -28,14 +28,25 @@ const AddJournals = () => {
 
   const navigator = useNavigate()
 
-  const [title , setTitle] = React.useState('')
-  const [description , setDescription] = React.useState('')
-  const [journalContent , setJournalContent] = React.useState('')
-  const [author , setAuthor] = React.useState('')
-  const [image , setImage] = React.useState("")
+  const [title , setTitle] = useState('')
+  const [description , setDescription] = useState('')
+  const [journalContent , setJournalContent] = useState('')
+  const [author , setAuthor] = useState('')
+  const [image , setImage] = useState("")
+  function getCookieValue(name) {
+    const cookies = document.cookie.split(';');
+    for (let cookie of cookies) {
+        cookie = cookie.trim();
+        if (cookie.startsWith(name + '=')) {
+            return cookie.substring(name.length + 1);
+        }
+    }
+    return null;
+}
 
   const handleSubmit = async() => {
     try{
+      const token = getCookieValue('journal_token')
       const response = await axios.post(`${import.meta.env.VITE_BASE_URL}journal/add`, {
         title: title,
         description: description,
@@ -44,10 +55,11 @@ const AddJournals = () => {
         author: author
     }, {
         headers: {
-            'Authorization': `Bearer ${document.cookie}`,
+            'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
         }
     })
+    console.log(response)
     if(response.status === 200){
       navigator('/home')
     }
