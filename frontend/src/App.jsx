@@ -14,6 +14,9 @@ function App() {
     if(token){
       navigate('/')
     }
+    else{
+      navigate('/login')
+    }
   },[navigate])
 
   return (

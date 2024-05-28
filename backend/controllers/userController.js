@@ -11,7 +11,7 @@ if(!req.user){
     return res.status(400).json({error:true,message:'User not found'})
 }
 try{
-    return res.status(200).json({error:false,message:{username: req.user.username}})
+    return res.status(200).json({error:false,message:{username: req.user.userName}})
   }catch(err){
    res.status(400).json({error:true,message:err.message})
   }
@@ -66,11 +66,10 @@ const signup = async(req, res) =>{
         if(response){
             return res.status(401).json({error: true, message:"User Name already exists"});
         }
-
         const hashPassword = await bcrypt.hash(password, saltRounds);
-
+        const authToken = await generateToken(userName,"user");
         try{
-            const doc = await userModel.create({userName: userName, password: hashPassword, email: email})
+            const doc = await userModel.create({userName: userName, password: hashPassword, email: email,token:authToken})
             if(doc){
                 return res.status(200).json({error:false, message:"user created successfully"});
             }
