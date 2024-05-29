@@ -6,6 +6,8 @@ import axios from 'axios'
 import {useNavigate,useParams} from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { FaWandMagicSparkles } from "react-icons/fa6";
+
 
 const AddJournals = () => {
  
@@ -36,7 +38,9 @@ const AddJournals = () => {
   const [author , setAuthor] = useState('')
   const [image , setImage] = useState("")
   const [data,setData] = useState([])
+  const [generated,setGenerated] = useState('')
   const [_id,setId] = useState('')
+  const [gen,setGen] =  useState(0);
 
   function getCookieValue(name) {
     const cookies = document.cookie.split(';');
@@ -63,7 +67,7 @@ const AddJournals = () => {
        'Content-Type' : 'application/json'
       }
     })
-    // setData(data.data.message)
+  
     setId(_id)
     setTitle(data.data.message.title)
     setAuthor(data.data.message.author)
@@ -75,9 +79,7 @@ const AddJournals = () => {
   }
   }
   
-  const restoreData =()=>{
-    
-  }
+
 
     useEffect(()=>{
       if(id){
@@ -85,10 +87,56 @@ const AddJournals = () => {
       }
     },[id])
     
+    const extractGen = (content) => {
+      const cleanedContent = content.replace(/\n/g, '').replace(/\*/g, '');
+      const sentences = cleanedContent.split(/[.!?]+/);
+      sentences.shift(); 
+      sentences.pop();  
+      const modifiedContent = sentences.join('. ');
+  
+      return modifiedContent;
+  };
+  
+
+  
+    const handleGenerate=async()=>{
+      setGen(1);
+      if(!title){
+           return toast.error('Enter Title')
+      }
+      const token = getCookieValue('journal_token');
+      try{
+        const res = await axios.post(`${import.meta.env.VITE_BASE_URL}journal/generateblog`,{
+          data : title
+        },
+      {
+        headers :{
+          'Content-Type' : 'application/json',
+          'Authorization' : `Bearer ${token}`
+        }
+      })
+      const content = extractGen(res.data.message);
+      setGenerated(content)
+      setGen(1);
+      
+      }catch(err){
+         console.log(err.message)
+      }
+  }
+  
+
+  useEffect(() => {
+    if (gen === 1) {
+      setJournalContent(generated);
+      setGen(0); 
+    }
+  }, [gen, generated]);
+  
  
   const handleSubmit = async() => {
     try{
       const token = getCookieValue('journal_token')
+
       if(title==''||description==''||journalContent==''||image==''||author==''){
         toast.error('Fill all the details')
         return;
@@ -109,6 +157,7 @@ const AddJournals = () => {
     console.log(response)
     if(response.status === 200){
       navigator('/home')
+      setJournalContent('');
     }
     }
     catch(err){
@@ -122,8 +171,8 @@ const AddJournals = () => {
         <div className='text-4xl border-b-2 border-solid border-[silver] p-4'>Showcase Your Journals</div>
         <div className='w-full sm:w-[70%] flex flex-col items-start gap-4 text-lg m-2'>
           <div>Title : </div>
-          <input type='text' className='w-full p-2 border-2 border-gray-300 rounded-lg shadow-md' placeholder='Enter your Title here...'
-          value={title} onChange={(e) => { setTitle(e.target.value) }} required
+          <input type='text' className='w-full p-2 border-2 border-gray-300 rounded-lg shadow-md' placeholder='Enter your Title here'
+          value={title} onChange={(e) => {setTitle(e.target.value) }} required
           />
         </div>
         <div className='w-full sm:w-[70%] flex flex-col items-start gap-4 text-lg m-2'>
@@ -133,7 +182,13 @@ const AddJournals = () => {
           />
         </div>
         <div className='w-full sm:w-[70%] flex flex-col items-start gap-4 text-lg m-2'>
-          <div>Journal Content : </div>
+          <div className='flex justify-between w-full items-center'>
+          <span>Journal Content : </span>
+          <button onClick={()=>(handleGenerate())} className='flex items-center gap-x-[0.5rem] bg-green-400 p-[0.5rem] rounded-md '>
+              <span className='text-sm'>Generate using AI</span>
+             <FaWandMagicSparkles />
+           </button>
+          </div>
           <ReactQuill
               modules={modules}
               formats={formats}
@@ -154,7 +209,7 @@ const AddJournals = () => {
             <div>Cover image : </div>
             <input type='text' className='w-full p-2 border-2 border-gray-300 rounded-lg shadow-md' placeholder='Enter your image url...' 
               value = {image}
-             onChange={(e) => {
+              onChange={(e) => {
               setImage(e.target.value)
             }}
   
