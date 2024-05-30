@@ -24,32 +24,41 @@ const getUserJournal = async (req, res) => {
 
 const addJournal = async (req, res) => {
     try {
-        const { id, title, description, journalContent, image, author } = req.body;
+        const { id, title, description, journalContent, author } = req.body;
         const userName = req.user.userName;
-
         let existingJournal;
-
+        const imageFile = req.file ? req.file.path : null;
+        const image = `${process.env.BACKEND_URL}${imageFile}`
+        console.log(image)
         if (id) {
             existingJournal = await journalModel.findById(id);
         }
-
         if (existingJournal) {
             existingJournal.title = title;
             existingJournal.description = description;
             existingJournal.journalContent = journalContent;
-            existingJournal.image = image;
+            if (image) {
+                existingJournal.image = image; 
+            }
             existingJournal.author = author;
             await existingJournal.save();
 
             return res.status(200).json({ error: false, message: "Journal Updated" });
         } else {
-            await journalModel.create({ title, description, journalContent, image, author, userName });
+            await journalModel.create({
+                title,
+                description,
+                journalContent,
+                author,
+                userName,
+                image, 
+            });
             return res.status(200).json({ error: false, message: "Journal Added" });
         }
     } catch (err) {
         return res.status(500).json({ error: true, message: err.message });
     }
-}
+};
 
 const updateJournal = async(req,res)=>{
     try{
@@ -57,10 +66,9 @@ const updateJournal = async(req,res)=>{
        const title = req.body.title;
        const description = req.body.description;
        const journalContent = req.body.journalContent;
-       const image = req.body.image;
+       const image = req.file.path;
        const author = req.body.author;
        const doc = await journalModel.updateOne({userName:username,title:title})
-
     }catch(err){
        console.log(err)
     }
