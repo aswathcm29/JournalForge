@@ -2,6 +2,7 @@
 /* eslint-disable no-unused-vars */
 import React,{useState, useEffect} from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom';
 
 const JournalCard = (props) => {
     return (
@@ -26,10 +27,27 @@ const JournalCard = (props) => {
   const PopJourn = () => {
 
     const [data, setData] = useState([]);
+    function getCookieValue(name) {
+      const cookies = document.cookie.split(';');
+      for (let cookie of cookies) {
+          cookie = cookie.trim();
+          if (cookie.startsWith(name + '=')) {
+              return cookie.substring(name.length + 1);
+          }
+      }
+      return null;
+  }
+  
 
     useEffect(()=>{
         const fetchData = async () => {
-            const response = await axios.get(`${import.meta.env.VITE_BASE_URL}journal/getJournals`);
+          const token = getCookieValue('journal_token')
+            const response = await axios.get(`${import.meta.env.VITE_BASE_URL}journal/getJournals`,{
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+            }
+        });
             setData(response.data.journals);
             console.log(response.data.journals);
         }
@@ -45,13 +63,9 @@ const JournalCard = (props) => {
               <div className='w-[90%] h-[90%] overflow-x-auto flex gap-x-10 no-scrollbar'>
                 {
                   data.map((item, index) => {
-                    return <JournalCard key={index} title={item.title} ima={item.image} />
+                    return (<Link to={`/${item._id}`} key={index}><JournalCard key={index} title={item.title} ima={item.image} /></Link>)
                   })
                 }
-                {/* <JournalCard title='Interdisciplinary Studies' ima='https://th.bing.com/th/id/OIP.CgCAFeSDIFIQ6YyGbChH5AHaIM?w=925&h=1024&rs=1&pid=ImgDetMain' />
-                <JournalCard title='Educational Research' ima='https://i.pinimg.com/originals/aa/26/92/aa269268f3f7c64bccfefba38dc90944.jpg' />
-                <JournalCard title='Interdisciplinary Studies' ima='https://th.bing.com/th/id/OIP.CgCAFeSDIFIQ6YyGbChH5AHaIM?w=925&h=1024&rs=1&pid=ImgDetMain' />
-                <JournalCard title='Educational Research' ima='https://i.pinimg.com/originals/aa/26/92/aa269268f3f7c64bccfefba38dc90944.jpg' /> */}
               </div>
             </div>
           </div>

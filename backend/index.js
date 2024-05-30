@@ -7,7 +7,9 @@ const cookieParser = require('cookie-parser');
 const userRoutes = require('./routes/userRoutes');
 const journalRoutes = require('./routes/journalRoutes');
 const multer  = require('multer')
-const upload = multer({ dest: 'uploads/' })
+
+
+
 
 const app = express();
 app.use(express.json());
@@ -22,9 +24,6 @@ app.listen(process.env.PORT,()=>{
     console.log(`server running on port ${process.env.PORT}`);
 })
 
-app.use('/users', userRoutes);
-app.use('/journal', journalRoutes);
-
 try{
     const connect = async() =>{
         await mongoose.connect(process.env.DATABASE_URL)
@@ -35,3 +34,16 @@ try{
 catch(err){
     console.log(err.message)
 }
+
+app.get('/',(req, res)=>{
+    res.status(200).json("hello world")
+})
+
+
+app.use('/uploads',express.static('uploads'))
+
+app.use('/users', userRoutes);
+app.use('/journal', journalRoutes);
+
+
+

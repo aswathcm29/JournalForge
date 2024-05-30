@@ -22,7 +22,7 @@ const Navbar = () => {
              <div className='flex flex-row gap-x-4 justify-center items-center'>
              <button onClick={toPublish} className='flex bg-green-400 w-[15rem] h-[3rem] items-center justify-center rounded-full gap-x-3'>
                 <FaFile className='text-3xl px-2'></FaFile>
-                <button className='text-xl'>Publish</button>
+                <button className='text-xl'>Add your Journal</button>
              </button>
              
              {/* hidden lg: */}

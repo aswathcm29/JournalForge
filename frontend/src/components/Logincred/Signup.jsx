@@ -23,7 +23,7 @@ const SignupForm =()=>{
       return
     }
     try{
-      const response = await axios.post('http://localhost:5000/users/signup', {
+      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}users/signup`, {
         userName, email, password
       }, {
         headers: {
@@ -33,6 +33,7 @@ const SignupForm =()=>{
       console.log(response)
       if(response.status === 200){
         toast.success("registered successfully")
+        document.cookie = `journal_token=${response.data.message.token}`
         navigate('/')
       }
     }
@@ -129,7 +130,7 @@ const SignupForm =()=>{
                         <ToastContainer />
                     </form>
                         <div className="text-center text-gray-900">Have an account?
-                        <button className="text-green-500 px-2 hover:underline" onClick={toSignup}>Login</button>
+                        <button className="text-green-500 px-2 hover:underline" onClick={()=>toSignup()}>Login</button>
                      </div>
                 </div>
     </>

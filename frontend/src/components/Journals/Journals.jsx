@@ -24,6 +24,18 @@ const Journals = () => {
     const [data, setData] = useState([]);
     const [search,setSearch] = useState('')
     const [filteredData,setfilteredData] = useState(data)
+
+    function getCookieValue(name) {
+        const cookies = document.cookie.split(';');
+        for (let cookie of cookies) {
+            cookie = cookie.trim();
+            if (cookie.startsWith(name + '=')) {
+                return cookie.substring(name.length + 1);
+            }
+        }
+        return null;
+    }
+
     const handleSearch = () => {
         const value = search.toLowerCase();
         if(value === ""){
@@ -41,7 +53,13 @@ const Journals = () => {
       };
     useEffect(()=>{
         const fetchData = async () => {
-            const response = await axios.get(`${import.meta.env.VITE_BASE_URL}journal/getJournals`);
+            const token  = getCookieValue('journal_token')
+            const response = await axios.get(`${import.meta.env.VITE_BASE_URL}journal/getJournals`,{
+                   headers:{
+                    'Authorization':`Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                   }
+            });
             setData(response.data.journals);
             console.log(response.data.journals);
         }
@@ -62,7 +80,6 @@ const Journals = () => {
                 className='border-0 border-b-2 border-solid border-b-gray-600 md:min-w-[10rem] w-[50%] h-10 sm:p-2 bg-[#f3f4f5]'
                 onChange={(e) => setSearch(e.target.value)}
             />
-            {console.log(search)}
             <button className='h-10 w-20 bg-green-400 m-4 rounded-lg' onClick={()=>handleSearch()}>Search</button>
         </div>
         </div>

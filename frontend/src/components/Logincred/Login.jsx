@@ -4,6 +4,8 @@ import {useNavigate} from 'react-router-dom';
 import loginImg from '../../assets/image.png' 
 import React, { useState } from 'react'
 import axios from 'axios'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const LoginForm =()=>{
     const [userName, setUserName] = useState('')
@@ -17,22 +19,21 @@ const LoginForm =()=>{
     const handleSubmit = async(e) =>{
         e.preventDefault()
         try{
-            const response = await axios.post('http://localhost:5000/users/login', {
+            const response = await axios.post(`${import.meta.env.VITE_BASE_URL}users/login`, {
             userName, password
             }, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
             })
-            console.log(response)
             if(response.status === 200){
                 document.cookie = `journal_token=${response.data.message.token}`
-                console.log(document.cookie)
-                navigate('/');
+                console.log('Login Successful')
+                navigate('/')
             }
         }
         catch(err){
-            console.log(err)
+            toast.error("Wrong username or password")
         }
     }
 
@@ -104,6 +105,7 @@ const LoginForm =()=>{
                         <div className="text-center text-gray-900"> Don't have an account?
                         <button className="text-green-500 px-2 hover:underline" onClick={toSignup}>Sign up</button>
                      </div>
+                     <ToastContainer/>
                 </div>
     )
 }
