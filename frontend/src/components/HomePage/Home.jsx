@@ -12,7 +12,6 @@ const Home = () => {
         <About/>
         <PopJourn/>
       </div>
-       
     </div>
   )
 }

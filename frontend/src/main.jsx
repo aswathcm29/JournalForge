@@ -44,11 +44,17 @@ const appRouter = createBrowserRouter([
     {
       path:'/addJournals',
       element: <AddJournals/>
+    },   {
+      path:'/addJournals/:id',
+      element: <AddJournals/>
     },
     {
       path:'/profile',
       element:<Profile/>
-    }
+    },{
+      path:'/:journalid',
+      element:<JournalView/>
+    },
   ]
 },
   {
@@ -58,10 +64,6 @@ const appRouter = createBrowserRouter([
   {
     path:'/signup',
     element:<Signup/>
-    },
-    {
-      path:'/:journalid',
-      element:<JournalView/>
     },
 ])
 

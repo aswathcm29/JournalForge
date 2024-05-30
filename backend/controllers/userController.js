@@ -2,6 +2,20 @@ const {userModel} = require('../models/userSchema')
 const saltRounds = 10;
 const bcrypt = require('bcrypt');
 const { generateToken } = require('../utils/Token');
+const jwt = require('jsonwebtoken');
+
+
+
+const getUser = (req, res) =>{
+if(!req.user){
+    return res.status(400).json({error:true,message:'User not found'})
+}
+try{
+    return res.status(200).json({error:false,message:{username: req.user.userName}})
+  }catch(err){
+   res.status(400).json({error:true,message:err.message})
+  }
+}
 
 const login = async (req, res) => {
     console.log("check")
@@ -11,19 +25,15 @@ const login = async (req, res) => {
         console.log(userName,passWord)
         if(userName!="" && passWord!=""){
             const user = await userModel.findOne({userName:userName})
-            //  console.log(user)
             if(!user){
               return  res.status(500).json({error:true,message:"User Not Found"})
-            }
-            
-            const passwordMatch =  await bcrypt.compare(passWord,user.password);
-            // console.log(passwordMatch)
+            }    
+            const passwordMatch  =  bcrypt.compare(passWord,user.password);
             if(passwordMatch){
                const authToken = await generateToken(userName,"user");
                if(authToken === ""){
                 return res.status(400).json({error:true, message:"auth token not generated"});
                }
-               res.cookie("token", authToken);
                return res.status(200).json({error:false,message:{token:authToken,userType: "user"}})
             }
             else{
@@ -34,7 +44,6 @@ const login = async (req, res) => {
             return res.status(500).json({error:true,message:"Enter UserName and PassWord"})
         }
 
-        
     }
     catch(e){
         return res.status(404).json({error:true,message:e.message})
@@ -57,11 +66,10 @@ const signup = async(req, res) =>{
         if(response){
             return res.status(401).json({error: true, message:"User Name already exists"});
         }
-
         const hashPassword = await bcrypt.hash(password, saltRounds);
-
+        const authToken = await generateToken(userName,"user");
         try{
-            const doc = await userModel.create({userName: userName, password: hashPassword, email: email})
+            const doc = await userModel.create({userName: userName, password: hashPassword, email: email,token:authToken})
             if(doc){
                 return res.status(200).json({error:false, message:"user created successfully"});
             }
@@ -77,4 +85,4 @@ const signup = async(req, res) =>{
     }
 }
 
-module.exports = {signup, login}
+module.exports = {signup, login, getUser}
