@@ -80,7 +80,6 @@ const Journals = () => {
                 className='border-0 border-b-2 border-solid border-b-gray-600 md:min-w-[10rem] w-[50%] h-10 sm:p-2 bg-[#f3f4f5]'
                 onChange={(e) => setSearch(e.target.value)}
             />
-            {console.log(search)}
             <button className='h-10 w-20 bg-green-400 m-4 rounded-lg' onClick={()=>handleSearch()}>Search</button>
         </div>
         </div>
