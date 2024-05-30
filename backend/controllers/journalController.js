@@ -1,8 +1,4 @@
-const jwt = require('jsonwebtoken');
 const {journalModel} = require('../models/journalSchema');
-const {journalValidationSchema} = require('../validation/validation');
-const multer  = require('multer')
-const upload = multer({ dest: 'uploads/' })
 
 const getJournalbyId = async (req, res) => {
     try{
@@ -17,11 +13,8 @@ const getJournalbyId = async (req, res) => {
 }
 
 const getUserJournal = async (req, res) => {
-    try{
-        const decoded = jwt.decode(req.headers.authorization.split(" ")[1].split("=")[1]);
-        console.log(decoded)
-        const userName = decoded.userName;
-        const journals = await journalModel.find({userName: userName});
+    try{ 
+        const journals = await journalModel.find({userName: req.user.userName});
         return res.status(200).json({error:false, message:journals});
     }
     catch(err){
@@ -30,37 +23,65 @@ const getUserJournal = async (req, res) => {
 }
 
 const addJournal = async (req, res) => {
-    try{
-        console.log('hello')
-        const title = req.body.title;
-        const description = req.body.description;
-        const journalContent = req.body.journalContent;
-        const image = req.body.image;
-        const author = req.body.author;
-        console.log(req.headers.authorization);
-        console.log(req.headers.authorization.split(" "))
-        const decoded = jwt.decode(req.headers.authorization.split(" ")[1].split("=")[1]);
-        console.log(decoded)
-        // req.body.userName = 
-        // console.log(decoded.userName)
-        const userName = decoded.userName;
-        console.log(userName)
-
-        // const {error, value} = journalValidationSchema.validate(req.body);
-        // if(error){
-        //     return res.status(400).json({error:true, message:error.details[0].message});
-        // }
-
-        try{
-            const doc = await journalModel.create({title: title, description: description, journalContent: journalContent, image: image, author: author, userName: userName});
-            return res.status(200).json({error:false, message:"Journal Added"});
+    try {
+        const { id, title, description, journalContent, author } = req.body;
+        const userName = req.user.userName;
+        let existingJournal;
+        const imageFile = req.file ? req.file.path : null;
+        const image = `${process.env.BACKEND_URL}${imageFile}`
+        console.log(image)
+        if (id) {
+            existingJournal = await journalModel.findById(id);
         }
-        catch(err){
-            return res.status(500).json({error:true, message:err.message});
+        if (existingJournal) {
+            existingJournal.title = title;
+            existingJournal.description = description;
+            existingJournal.journalContent = journalContent;
+            if (image) {
+                existingJournal.image = image; 
+            }
+            existingJournal.author = author;
+            await existingJournal.save();
+
+            return res.status(200).json({ error: false, message: "Journal Updated" });
+        } else {
+            await journalModel.create({
+                title,
+                description,
+                journalContent,
+                author,
+                userName,
+                image, 
+            });
+            return res.status(200).json({ error: false, message: "Journal Added" });
         }
+    } catch (err) {
+        return res.status(500).json({ error: true, message: err.message });
     }
-    catch(e){
-        return res.status(404).json({error:true, message:e.message});
+};
+
+const updateJournal = async(req,res)=>{
+    try{
+       const username = req.body.userName;
+       const title = req.body.title;
+       const description = req.body.description;
+       const journalContent = req.body.journalContent;
+       const image = req.file.path;
+       const author = req.body.author;
+       const doc = await journalModel.updateOne({userName:username,title:title})
+    }catch(err){
+       console.log(err)
+    }
+}
+
+const deleteJournal = async(req,res)=>{
+    const userName = req.body.userName;
+    const title = req.body.title;
+    try{
+    const doc = await journalModel.deleteOne({userName:userName,title:title});
+    return res.status(200).json({error:false,message:"successfully deleted"})
+    }catch(err){
+        return res.status(404).json({error:true,message:"deletion failed"})
     }
 }
 
@@ -74,4 +95,4 @@ const getJournals = async (req, res) => {
     }
 }
 
-module.exports = { addJournal, getJournals, getUserJournal, getJournalbyId }
+module.exports = { addJournal, getJournals, getUserJournal, getJournalbyId,updateJournal,deleteJournal }

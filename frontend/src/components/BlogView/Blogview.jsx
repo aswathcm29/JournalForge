@@ -1,51 +1,42 @@
-/* eslint-disable no-unused-vars */
-import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
-import axios from 'axios'
-
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
 const JournalView = () => {
-  const {journalid} = useParams();
-    const [blog , setBlogs] = useState({});
+  const { journalid } = useParams();
+  const [blog, setBlogs] = useState({});
+  const [date, setDate] = useState('');
 
-    useEffect(()=>{
-      console.log(journalid)
-      const fetchJournal = async () =>{
-        // console.log(`${import.meta.env.VITE_BASE_URL}/journal/getJournalbyId`)
-        const response = await axios.post(`${import.meta.env.VITE_BASE_URL}journal/getJournalbyId`,{id:journalid},
-          {headers:{"request-JournalView":"JournalView/request"}})
-          console.log("thera",response, "id", journalid);
-          setBlogs(response.data.message)
+  function getCookieValue(name) {
+    const cookies = document.cookie.split(';');
+    for (let cookie of cookies) {
+      cookie = cookie.trim();
+      if (cookie.startsWith(name + '=')) {
+        return cookie.substring(name.length + 1);
       }
-      fetchJournal();
-    },[journalid])
+    }
+    return null;
+  }
 
-    // const [userName, setUserName] = useState('');
-    // const {blogid} = useParams();
-    // useEffect(()=>{
-    //   const handleUserName = async () =>{
-    //     const Response = await fetch('http://localhost:5000/profile',{
-    //         credentials:'include',
-    //     })
-    //     if(Response.status === 500){
-    //         setUserName(null);
-    //     }
-    //     else{
-    //         const userName = await Response.json();
-    //         setUserName(userName);
-    //     }
-    //   }
-    //   const data = async () =>{
-    //     const response = await fetch(`http://localhost:5000/blog/${blogid}`,{
-    //       method:'GET',
-    //       headers:{"request-JournalView":"JournalView/request"}
-    //     });
-    //     const blogdata = await response.json();
-    //     setBlogs(blogdata);
-    //   }
-    //   data();
-    //   handleUserName();
-    // },[blogid]);
+  useEffect(() => {
+    const fetchJournal = async () => {
+      const Token = getCookieValue('journal_token');
+      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}journal/getJournalbyId`, { id: journalid }, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${Token}`
+        }
+      });
+      setBlogs(response.data.message);
+    };
+    fetchJournal();
+  }, [journalid]);
+
+  useEffect(() => {
+    if (blog.date) {
+      setDate(blog.date.split('T')[0]);
+    }
+  }, [blog.date]);
 
   return (
     <div className='w-[100%] flex justify-center items-center'>
@@ -55,25 +46,26 @@ const JournalView = () => {
         </div>
         <div className='flex flex-col sm:flex-row sm:w-[90%] sm:pt-10 sm:pb-10 justify-center items-center gap-5'>
           <div className='w-[90%] mt-5 sm:w-[40%] sm:mt-0'>
-              
-              <img src={blog.image} className=' rounded-md'></img>
+            <img src={blog.image} className='rounded-md' alt='Journal Cover'/>
           </div>
-          <div className=' flex flex-col w-[90%] gap-5 sm:w-[60%] py-5'>
-              <div className=' text-l sm:text-3xl'>{blog.description}</div>
-              <div className='flex items-center gap-5 justify-between sm:justify-normal'>
-                <div className='flex flex-col'>
-                  <div>{blog.userName}</div>
-                  <div>{blog.date}</div>
+          <div className='flex flex-col w-[90%] gap-5 sm:w-[60%] py-5'>
+            <div className='text-l sm:text-3xl'>{blog.description}</div>
+            <div className='flex items-center gap-5 justify-between sm:justify-normal'>
+              <div className='flex flex-col items-end w-full'>
+                <div className='bg-gray-200 p-[1rem] rounded-md flex flex-col items-start'>
+                  <div className='text-[1rem] text-gray-700'>Author : {blog.userName}</div>
+                  <div className='text-[1rem] text-gray-700'>Date : {date}</div>
                 </div>
               </div>
+            </div>
           </div>
         </div>
         <div className='w-[90%] text-left'>
-            <div dangerouslySetInnerHTML={{__html:blog.journalContent}}></div>
+          <div dangerouslySetInnerHTML={{ __html: blog.journalContent }}></div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default JournalView
+export default JournalView;
