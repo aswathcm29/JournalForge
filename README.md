@@ -22,6 +22,12 @@ JournalForge is built using the MERN stack and integrates with the Groq API for 
 
 ## Getting Started
 
+Use the test credentials to have a glimpse of our current version - https://journal-forge.vercel.app
+
+```
+  username : test
+  password : test
+```
 ### Prerequisites
 
 - Node.js (v14 or later)
