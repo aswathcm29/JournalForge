@@ -43,6 +43,8 @@ To use the AI-powered features of JournalForge, you'll need a Groq API key. Here
 3. Look for an option to create a new API key or view existing keys.
 4. Generate a new API key and copy it securely.
 5. Keep this key confidential and use it in the `.env` file as instructed below.
+6. As of now you can use this for groq_api_key = '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'
+7. Or you can create your own by the above given steps and its simple
 
 ### Installation and Running the App
 
