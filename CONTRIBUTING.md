@@ -50,20 +50,19 @@ Unsure where to begin contributing to JournalForge? You can start by looking thr
    cd ../backend
    npm install
    ```
-3. Start the backend server:
+3. Set up your environment varibles
+4. Start the backend server:
    ```
    cd backend
    npm start
    ```
-4. In a new terminal, start the frontend server:
+5. In a new terminal, start the frontend server:
    ```
    cd frontend
    npm start
    ```
 
 Make sure to test your changes thoroughly before submitting a pull request.
-
-## Styleguides
 
 ### Git Commit Messages
 
