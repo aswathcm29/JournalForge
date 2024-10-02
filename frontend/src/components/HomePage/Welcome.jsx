@@ -1,40 +1,38 @@
-/* eslint-disable no-unused-vars */
-import React from 'react'
-import homeimg from '../../assets/homepage.png'
-import { TypeAnimation } from 'react-type-animation';
-import { useNavigate } from 'react-router';
+import { TypeAnimation } from "react-type-animation";
+import { Link } from "react-router-dom";
+import { Button } from "../ui/button";
 
 const Welcome = () => {
-  const navigate = useNavigate()
-  const toExplore=()=>{
-    navigate('/journals')
-  }
   return (
-    <section  className='h-[70vh] mt-20'>
-        <div className='h-full flex justify-center items-center relative pb-10 '>
-        <div className='flex flex-col px-[9rem] z-10 '>
-            <p className='text-6xl flex flex-start'> <TypeAnimation
-               sequence={[
-                'Welcome to JournalForge',
-                  1000, 
-                    ]}
-                  wrapper="span"
-                 speed={50}
-                  repeat={Infinity}
-              /></p> 
-            <p className='py-2'>Join a Global Community of Scholars and Innovators in Pushing the Boundaries of Knowledge</p>
-            <div className='py-10 flex flex-start'><button className='w-[12rem] h-[3.5rem] bg-green-400 rounded-full' onClick={toExplore}>
-                <span className='text-2xl'>Explore</span>
-            </button>
-            </div> 
-       </div>
-           <div>
-            <img src={homeimg} alt="" className='absolute z-0 top-[5rem] left-[4rem]'></img>
-           </div>
+    <section className="bg-gradient-to-r from-green-50 to-blue-50 py-20">
+      <div className="container mx-auto px-4">
+        <div className="max-w-3xl mx-auto text-center">
+          <h1 className="text-4xl md:text-5xl font-bold mb-6 text-gray-800">
+            <TypeAnimation
+              sequence={["Welcome to JournalForge", 1000]}
+              wrapper="span"
+              speed={50}
+              repeat={Infinity}
+            />
+          </h1>
+          <p className="text-xl text-gray-600 mb-8">
+            Join a Global Community of Scholars and Innovators in Pushing the
+            Boundaries of Knowledge
+          </p>
+          <div className="flex justify-center space-x-4">
+            <Link to="/journals">
+              <Button
+                variant="default"
+                size="lg"
+                className="bg-green-600 hover:bg-green-700 text-lg"
+              >
+                Explore Journals
+              </Button>
+            </Link>
+          </div>
         </div>
-      <div>  
       </div>
     </section>
-  )
-}
-export default Welcome
+  );
+};
+export default Welcome;
