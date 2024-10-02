@@ -45,7 +45,7 @@ async function ContactAdmin(req, res) {
 
   const mailOptions = {
     from: "taskmaster991@gmail.com",
-    to: "asharma7588@gmail.com",
+    to: "aswathcm29@gmail.com",
     subject: "New From JournalForge",
     text: `
         Name: ${Name}
