@@ -1,7 +1,10 @@
 /* eslint-disable no-unused-vars */
-import React from 'react'
+import React, { useEffect } from 'react'
 
 const About = () => {
+  useEffect(()=>{
+    window.scrollTo(0,0)
+  },)
   return (
     <div>
     <section id='about' className=''>
