@@ -6,7 +6,6 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import '@fortawesome/fontawesome-free/css/all.min.css'; // Font Awesome import
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 const LoginForm = () => {
     const [userName, setUserName] = useState('');
