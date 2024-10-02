@@ -34,6 +34,6 @@ router.post("/deleteJournal", checkUser, deleteJournal);
 router.post("/generateblog", checkUser, categoriesFeedback);
 
 //adding contact form route
-router.post("/Contact", ContactAdmin);
+router.post("/Contact", checkUser, ContactAdmin);
 
 module.exports = router;
