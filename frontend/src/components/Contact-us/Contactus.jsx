@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import "./ContactusStyles.css";
-import axios from "axios";
 
 const ContactusForm = () => {
   const [formData, setFormData] = useState({
@@ -29,24 +28,20 @@ const ContactusForm = () => {
     setLoading(true);
 
     try {
-      const Token = getCookieValue("journal_token");
-      const response = await axios.post(
-        "http://localhost:5000/journal/Contact",
-        {
+      const response = await fetch("http://localhost:5000/journal/Contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
           Name: `${formData.firstName} ${formData.lastName}`,
           Email: formData.email,
           Phone: formData.phone,
           Message: formData.message,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${Token}`,
-          },
-        }
-      );
+        }),
+      });
 
-      if (response.status === 200) {
+      if (response.ok) {
         alert("Form data sent successfully!");
       } else {
         alert("Error sending form data.");
@@ -58,7 +53,6 @@ const ContactusForm = () => {
       setLoading(false);
     }
   };
-
   return (
     //added form
     <form className="w-full text-[#333]" onSubmit={handleSubmit}>
