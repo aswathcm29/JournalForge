@@ -1,20 +1,31 @@
-/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import loginImg from "../../assets/image.png";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const SignupForm = () => {
   const navigate = useNavigate();
   const toSignup = () => {
     navigate("/login");
   };
+  
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword((prev) => !prev);
+  };
+
+  const toggleConfirmPasswordVisibility = () => {
+    setShowConfirmPassword((prev) => !prev);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,16 +36,8 @@ const SignupForm = () => {
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_BASE_URL}users/signup`,
-        {
-          userName,
-          email,
-          password,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
+        { userName, email, password },
+        { headers: { "Content-Type": "application/json" } }
       );
       console.log(response);
       if (response.status === 200) {
@@ -46,6 +49,7 @@ const SignupForm = () => {
       toast.error("User already exists");
     }
   };
+
   return (
     <>
       <div
@@ -106,7 +110,7 @@ const SignupForm = () => {
               required=""
               id="password"
               name="password"
-              type="password"
+              type={showPassword ? "text" : "password"} 
               onChange={(e) => setPassword(e.target.value)}
             />
             <label
@@ -115,23 +119,45 @@ const SignupForm = () => {
             >
               Password
             </label>
+            <button
+              type="button"
+              onClick={togglePasswordVisibility}
+              className="absolute right-0 top-2 p-2 text-gray-500"
+            >
+              {showPassword ? (
+                <FaEyeSlash className="text-xl" />
+              ) : (
+                <FaEye className="text-xl" />
+              )}
+            </button>
           </div>
           <div className="relative">
             <input
               placeholder="Confirm Password"
               className="peer h-10 w-full border-b-2 border-solid border-gray-300 text-black bg-transparent placeholder-transparent focus:outline-none focus:border-gray-500"
               required=""
-              id="password"
-              name="password"
-              type="password"
+              id="confirmPassword"
+              name="confirmPassword" 
+              type={showConfirmPassword ? "text" : "password"} 
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
             <label
               className="absolute left-0 -top-3.5 text-gray-900 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:text-green-400 peer-focus:text-sm"
-              htmlFor="password"
+              htmlFor="confirmPassword" 
             >
               Confirm Password
             </label>
+            <button
+              type="button"
+              onClick={toggleConfirmPasswordVisibility}
+              className="absolute right-0 top-2 p-2 text-gray-500"
+            >
+              {showConfirmPassword ? (
+                <FaEyeSlash className="text-xl" />
+              ) : (
+                <FaEye className="text-xl" />
+              )}
+            </button>
           </div>
           <button
             className="w-full py-2 px-4 bg-green-400 hover:bg-green-500 rounded-md shadow-lg text-white font-semibold transition duration-200"
@@ -163,7 +189,7 @@ const Signup = () => {
         <div className="flex items-center justify-center rounded-2xl h-[86vh]">
           <div className="bg-white h-[35rem] flex rounded-xl w-full xl:w-[70%]">
             <div className="hidden w-[50%] md:block">
-              <img src={loginImg}></img>
+              <img src={loginImg} alt="Login" />
             </div>
             <SignupForm />
           </div>
