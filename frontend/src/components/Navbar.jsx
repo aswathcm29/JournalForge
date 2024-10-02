@@ -1,81 +1,90 @@
-/* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
-import { FaFile } from 'react-icons/fa';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
-import hamburger from '../assets/burger-menu-svgrepo-com.svg';
-import close from '../assets/close-svgrepo-com.svg';
-import About from './HomePage/About';
+import { Link, useLocation } from "react-router-dom";
+import { Button } from "./ui/button";
+import plus from "../assets/icons/plus.svg";
+import profile from "../assets/icons/user.svg";
+import MobileSidebar from "./HomePage/Sidebar";
+
+const navbarLinks = [
+  {
+    name: "Home",
+    href: "/",
+  },
+  {
+    name: "Journals",
+    href: "/journals",
+  },
+
+  {
+    name: "Contact",
+    href: "/contactus",
+  },
+];
 
 const Navbar = () => {
-  const navigate = useNavigate();
-  const location = useLocation(); // Get the current route
-
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  
-  const toPublish = () => {
-    navigate('/addjournals');
-  };
+  const location = useLocation();
 
   // Function to determine if the link is active
   const isActive = (path) => {
-    if ((path === '/' || path === '/home') && (location.pathname === '/' || location.pathname === '/home')) {
-      return 'text-green-500 font-bold';
+    if (
+      (path === "/" || path === "/home") &&
+      (location.pathname === "/" || location.pathname === "/home")
+    ) {
+      return "text-green-500 font-bold";
     }
-    return location.pathname === path ? 'text-green-500 font-bold' : ''; // Add your active class styles here
+    return location.pathname === path ? "text-green-600 font-bold" : "";
   };
 
   return (
-    <>
-      <header className="flex items-center justify-between border-b-4 border-green-400">
-        <span className="text-5xl">
-          J<span className="text-4xl mb-2 absolute">F</span>
-        </span>
-        <div className="flex flex-row gap-x-4 justify-center items-center">
-          <button
-            onClick={toPublish}
-            className="flex bg-green-400 w-[15rem] h-[3rem] items-center justify-center rounded-full gap-x-3"
-          >
-            <FaFile className="text-3xl px-2"></FaFile>
-            <button className="text-xl">Add your Journal</button>
-          </button>
-
-          {/* hidden lg: */}
-          <div className="block relative">
-            <ul
-              className={`
-                lg:flex flex-col lg:flex-row absolute lg:static gap-x-12 text-xl
-                top-8  ${isMenuOpen ? '-left-12' : 'hidden'} px-5 lg:p-0 shadow-lg lg:shadow-none lg: overflow-hidden
-              `}
-            >
-              <Link to="/home">
-                <li className={`p-4 ml-3 lg:p-0 shadow-sm ${isActive('/')}` }>
-                  Home
-                </li>
+    <header className="bg-white border-b border-gray-200 ">
+      <div className="container mx-auto px-4 py-4">
+        <nav className="flex items-center justify-between">
+          <Link to="/" className="flex items-center space-x-2">
+            <div className="md:hidden">
+              <MobileSidebar />
+            </div>
+            <span className="text-xl font-bold text-gray-800">
+              <h1 className="text-5xl flex items-start">
+                <span>J</span>
+                <span className="text-4xl mb-2 ">F</span>
+              </h1>
+            </span>
+          </Link>
+          <div className="hidden md:flex items-center space-x-6">
+            {navbarLinks.map((link) => (
+              <Link
+                key={link.name}
+                to={link.href}
+                className={`text-gray-600 hover:text-green-600 transition-colors ${isActive(
+                  link.href
+                )}`}
+              >
+                {link.name}
               </Link>
-              <Link to="/journals">
-                <li className={`p-4 lg:p-0 ${isActive('/journals')}`}>
-                  Journals
-                </li>
-              </Link>
-              <Link to="/contactus">
-                <li className={`p-4 lg:p-0 transition-transform ease-in-out ${isActive('/contactus')}`}>
-                  Contact us
-                </li>
-              </Link>
-              <Link to="/profile">
-                <li className={`p-4 lg:p-0 ${isActive('/profile')}`}>
-                  Profile
-                </li>
-              </Link>
-            </ul>
+            ))}
           </div>
-          <button onClick={() => setIsMenuOpen(!isMenuOpen)}>
-            <img src={isMenuOpen ? close : hamburger} className="h-8 lg:hidden" />
-          </button>
-        </div>
-      </header>
-      <hr className="h-[0.1rem] flex justify-center bg-green-500 mt-4 shadow-2xl" />
-    </>
+          <div className="flex items-center justify-center gap-2">
+            <Link to="/addjournals">
+              <Button
+                variant="default"
+                className="bg-green-600 hover:bg-green-700 flex items-center gap-2"
+              >
+                <img src={plus} alt="plus" width={24} height={24} />
+                Add Journal
+              </Button>
+            </Link>
+            <Link to="/profile">
+              <Button variant="icon" className="flex items-center ">
+                <img
+                  src={profile}
+                  alt="profile"
+                  className="size-6 md:size-7 lg:size-8"
+                />
+              </Button>
+            </Link>
+          </div>
+        </nav>
+      </div>
+    </header>
   );
 };
 
