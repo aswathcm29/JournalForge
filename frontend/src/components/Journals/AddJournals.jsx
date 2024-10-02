@@ -114,6 +114,7 @@ const AddJournals = () => {
     e.preventDefault(); 
     try {
       const token = getCookieValue('journal_token');
+      console.log("token:",token)
 
       if (!title || !description || !journalContent || !author) {
         toast.error('Fill all the details');
@@ -133,6 +134,7 @@ const AddJournals = () => {
           'Content-Type': 'multipart/form-data' 
         }
       });
+      console.log(response)
 
       if (response.status === 200) {
         navigate('/home');
