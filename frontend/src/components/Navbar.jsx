@@ -1,79 +1,157 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
-import { FaFile } from 'react-icons/fa';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
-import hamburger from '../assets/burger-menu-svgrepo-com.svg';
-import close from '../assets/close-svgrepo-com.svg';
-import About from './HomePage/About';
+import React, { useEffect, useState } from "react";
+import { FaFile } from "react-icons/fa";
+import { Link, useNavigate, useLocation, NavLink } from "react-router-dom";
+import hamburger from "../assets/burger-menu-svgrepo-com.svg";
+import close from "../assets/close-svgrepo-com.svg";
+import { AnimatePresence, motion } from "framer-motion";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation(); // Get the current route
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup event listener on component unmount
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const toPublish = () => {
-    navigate('/addjournals');
+    navigate("/addjournals");
   };
 
-  // Function to determine if the link is active
-  const isActive = (path) => {
-    if ((path === '/' || path === '/home') && (location.pathname === '/' || location.pathname === '/home')) {
-      return 'text-green-500 font-bold';
-    }
-    return location.pathname === path ? 'text-green-500 font-bold' : ''; // Add your active class styles here
-  };
+  const navLink = [
+    {
+      name: "Home",
+      link: "/home",
+    },
+    {
+      name: "Journals",
+      link: "/journals",
+    },
+    {
+      name: "Contact Us",
+      link: "/contactus",
+    },
+    {
+      name: "Profile",
+      link: "/profile",
+    },
+  ];
 
   return (
     <>
-      <header className="flex items-center justify-between border-b-4 border-green-400">
+      <header className="flex items-center justify-between border-b-4 border-green-400 p-4">
+        {/* Logo */}
         <span className="text-5xl">
           J<span className="text-4xl mb-2 absolute">F</span>
         </span>
-        <div className="flex flex-row gap-x-4 justify-center items-center">
-          <button
-            onClick={toPublish}
-            className="flex bg-green-400 w-[15rem] h-[3rem] items-center justify-center rounded-full gap-x-3"
-          >
-            <FaFile className="text-3xl px-2"></FaFile>
-            <button className="text-xl">Add your Journal</button>
-          </button>
 
-          {/* hidden lg: */}
-          <div className="block relative">
-            <ul
-              className={`
-                lg:flex flex-col lg:flex-row absolute lg:static gap-x-12 text-xl
-                top-8  ${isMenuOpen ? '-left-12' : 'hidden'} px-5 lg:p-0 shadow-lg lg:shadow-none lg: overflow-hidden
-              `}
-            >
-              <Link to="/home">
-                <li className={`p-4 ml-3 lg:p-0 shadow-sm ${isActive('/')}` }>
-                  Home
-                </li>
-              </Link>
-              <Link to="/journals">
-                <li className={`p-4 lg:p-0 ${isActive('/journals')}`}>
-                  Journals
-                </li>
-              </Link>
-              <Link to="/contactus">
-                <li className={`p-4 lg:p-0 transition-transform ease-in-out ${isActive('/contactus')}`}>
-                  Contact us
-                </li>
-              </Link>
-              <Link to="/profile">
-                <li className={`p-4 lg:p-0 ${isActive('/profile')}`}>
-                  Profile
-                </li>
-              </Link>
-            </ul>
+        {/* Desktop Nav Links */}
+        {!isMobile && (
+          <div className="relative w-full flex gap-6 items-center justify-center">
+            {navLink.map((item, index) => (
+              <NavLink
+                key={index}
+                to={item.link}
+                className="relative flex items-center"
+              >
+                {({ isActive }) => (
+                  <>
+                    {isActive && (
+                      <motion.div
+                        layoutId="nav"
+                        className="absolute inset-0 px-4 py-4 bg-[#4ADE80] rounded-3xl"
+                        transition={{
+                          type: "spring",
+                          stiffness: 500,
+                          damping: 30,
+                        }}
+                      />
+                    )}
+                    <span
+                      className={`relative z-10 px-4 py-2 ${
+                        isActive ? "text-black" : "text-gray-500"
+                      }`}
+                    >
+                      {item.name}
+                    </span>
+                  </>
+                )}
+              </NavLink>
+            ))}
           </div>
-          <button onClick={() => setIsMenuOpen(!isMenuOpen)}>
-            <img src={isMenuOpen ? close : hamburger} className="h-8 lg:hidden" />
+        )}
+
+        {/* Add Journal Button */}
+        <button
+          onClick={toPublish}
+          className="hidden lg:flex bg-green-400 w-[15rem] h-[3rem] items-center justify-center rounded-full gap-x-3"
+        >
+          <FaFile className="text-3xl px-2" />
+          <span className="text-xl">Add Journal</span>
+        </button>
+
+        {/* Hamburger Button for Mobile */}
+        {isMobile && (
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="lg:hidden"
+          >
+            <img src={isMenuOpen ? close : hamburger} className="h-8" />
           </button>
-        </div>
+        )}
       </header>
+
+      {/* Mobile Nav Menu */}
+      <AnimatePresence>
+        {isMobile && isMenuOpen && (
+          <motion.nav
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -50 }}
+            className="fixed top-0 left-0 right-0 z-50 bg-white shadow-lg p-4 flex flex-col gap-4 items-center"
+          >
+            {navLink.map((item, index) => (
+              <NavLink
+                key={index}
+                to={item.link}
+                className="text-xl font-semibold"
+                onClick={() => setIsMenuOpen(false)} // Close menu after clicking a link
+              >
+                {({ isActive }) => (
+                  <span
+                    className={`${
+                      isActive ? "text-green-500 font-bold" : "text-gray-700"
+                    }`}
+                  >
+                    {item.name}
+                  </span>
+                )}
+              </NavLink>
+            ))}
+
+            {/* Add Journal Button for Mobile */}
+            <button
+              onClick={toPublish}
+              className="bg-green-400 w-[12rem] h-[3rem] flex items-center justify-center rounded-full gap-x-3 mt-4"
+            >
+              <FaFile className="text-2xl px-2" />
+              <span className="text-lg">Add your Journal</span>
+            </button>
+          </motion.nav>
+        )}
+      </AnimatePresence>
+
+      {/* Desktop Nav Divider */}
       <hr className="h-[0.1rem] flex justify-center bg-green-500 mt-4 shadow-2xl" />
     </>
   );
