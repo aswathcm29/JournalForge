@@ -5,6 +5,7 @@ import { Link, useNavigate, useLocation, NavLink } from "react-router-dom";
 import hamburger from "../assets/burger-menu-svgrepo-com.svg";
 import close from "../assets/close-svgrepo-com.svg";
 import { AnimatePresence, motion } from "framer-motion";
+import MagneticEffect from "./util/MagneticEffect";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -92,14 +93,15 @@ const Navbar = () => {
         )}
 
         {/* Add Journal Button */}
-        <button
-          onClick={toPublish}
-          className="hidden lg:flex bg-green-400 w-[15rem] h-[3rem] items-center justify-center rounded-full gap-x-3"
-        >
-          <FaFile className="text-3xl px-2" />
-          <span className="text-xl">Add Journal</span>
-        </button>
-
+        <MagneticEffect>
+          <button
+            onClick={toPublish}
+            className="hidden lg:flex bg-green-400 w-[15rem] h-[3rem] items-center justify-center rounded-full gap-x-3"
+          >
+            <FaFile className="text-3xl px-2" />
+            <span className="text-xl">Add Journal</span>
+          </button>
+        </MagneticEffect>
         {/* Hamburger Button for Mobile */}
         {isMobile && (
           <button
