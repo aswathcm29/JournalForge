@@ -86,5 +86,41 @@ const signup = async(req, res) =>{
         return res.status(520).json({error:true, message: err.message})
     }
 }
+const forgot = async(req, res) =>{
+    const userName = req.body.userName;
+    const email = req.body.email;
+    const password = req.body.password;
 
-module.exports = {signup, login, getUser}
+    if(userName == "" || password == "" || email == ""){
+        return res.status(401).json({error: true, message:"invalid credentials"})
+    }
+    if(userName == undefined || password == undefined || email == undefined){
+        return res.status(401).json({error: true, message:"invalid credentials"})
+    }
+    try{
+        const response = await userModel.findOne({userName:userName});
+        if(!response){
+            return res.status(404).json({error: true, message:"User not found"});
+        }
+        
+        if(response.email !== email){
+            return res.status(404).json({error: true, message:"User not found"});
+        }
+        const hashPassword = await bcrypt.hash(password, saltRounds)
+        try{
+            response.password = hashPassword;
+            await response.save();
+            return res.status(200).json({error:false, message: "password changed"});
+        }
+        catch(err){
+            console.log(err.message)
+            return res.status(500).json({error:true, message: err.message})
+        }
+    }
+    catch(err){
+        console.log(err.message)
+        return res.status(520).json({error:true, message: err.message})
+    }
+}
+
+module.exports = {signup, login, getUser, forgot}
