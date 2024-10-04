@@ -11,7 +11,7 @@ const LoginForm = () => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false); // State for toggling password visibility
-  const [loading, setLoading] = useState(true); // State for loading spinner
+  const [loading, setLoading] = useState(false); // State for loading spinner
   const navigate = useNavigate();
 
   const toSignup = () => {
