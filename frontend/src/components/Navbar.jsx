@@ -33,16 +33,16 @@ const Navbar = () => {
         <div className="flex flex-row gap-x-4 justify-center items-center">
           <button
             onClick={toPublish}
-            className="flex bg-green-400 w-[15rem] h-[3rem] items-center justify-center rounded-full gap-x-3"
+            className="flex ml-8 bg-green-400 w-[15rem] h-[3rem]  items-center justify-center rounded-full "
           >
-            <FaFile className="text-3xl px-2"></FaFile>
+            <FaFile className=" text-3xl px-2 -ml-2 "></FaFile>
             <button className="text-xl">Add your Journal</button>
           </button>
 
           {/* hidden lg: */}
           <div className="block relative">
             <ul
-              className={`
+              className={`bg-[#f3f4f5] z-50
                 lg:flex flex-col lg:flex-row absolute lg:static gap-x-12 text-xl
                 top-8  ${isMenuOpen ? '-left-12' : 'hidden'} px-5 lg:p-0 shadow-lg lg:shadow-none lg: overflow-hidden
               `}
