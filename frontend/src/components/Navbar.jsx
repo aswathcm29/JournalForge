@@ -122,6 +122,13 @@ const Navbar = () => {
             exit={{ opacity: 0, y: -50 }}
             className="fixed top-0 left-0 right-0 z-50 bg-white shadow-lg p-4 flex flex-col gap-4 items-center"
           >
+            <button onClick={() => setIsMenuOpen(!isMenuOpen)}>
+              <img
+                src={close}
+                alt=""
+                className="h-6 absolute right-2 top-2 cursor-pointer"
+              />
+            </button>
             {navLink.map((item, index) => (
               <NavLink
                 key={index}
