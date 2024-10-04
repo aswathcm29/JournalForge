@@ -96,6 +96,46 @@ const Navbar = () => {
         <MagneticEffect>
           <button
             onClick={toPublish}
+
+            className="flex ml-8 bg-green-400 w-[15rem] h-[3rem]  items-center justify-center rounded-full "
+          >
+            <FaFile className=" text-3xl px-2 -ml-2 "></FaFile>
+            <button className="text-xl">Add your Journal</button>
+          </button>
+
+          {/* hidden lg: */}
+          <div className="block relative">
+            <ul
+              className={`bg-[#f3f4f5] z-50
+                lg:flex flex-col lg:flex-row absolute lg:static gap-x-12 text-xl
+                top-8  ${isMenuOpen ? '-left-12' : 'hidden'} px-5 lg:p-0 shadow-lg lg:shadow-none lg: overflow-hidden
+              `}
+            >
+              <Link to="/home">
+                <li className={`p-4 ml-3 lg:p-0 shadow-sm ${isActive('/')}` }>
+                  Home
+                </li>
+              </Link>
+              <Link to="/journals">
+                <li className={`p-4 lg:p-0 ${isActive('/journals')}`}>
+                  Journals
+                </li>
+              </Link>
+              <Link to="/contactus">
+                <li className={`p-4 lg:p-0 transition-transform ease-in-out ${isActive('/contactus')}`}>
+                  Contact us
+                </li>
+              </Link>
+              <Link to="/profile">
+                <li className={`p-4 lg:p-0 ${isActive('/profile')}`}>
+                  Profile
+                </li>
+              </Link>
+            </ul>
+          </div>
+          <button onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            <img src={isMenuOpen ? close : hamburger} className="h-8 lg:hidden" />
+
             className="hidden lg:flex bg-green-400 w-[15rem] h-[3rem] items-center justify-center rounded-full gap-x-3"
           >
             <FaFile className="text-3xl px-2" />
