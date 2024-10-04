@@ -3,6 +3,7 @@
 import React, {useEffect, useState} from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import {motion} from 'framer-motion'
 
 const Search = () =>{
     const [search,setSearch] = useState('')
@@ -83,26 +84,34 @@ const Journals = () => {
             <button className='h-10 w-20 bg-green-400 m-4 rounded-lg' onClick={()=>handleSearch()}>Search</button>
         </div>
         </div>
-        <div>
-            {filteredData.map((journal, index) =>
-             (
-                <Link to={`/${journal._id}`} key={index} className={`flex ${(index%2 === 0)?'flex-row':'lg:flex-row-reverse'} sm:p-4 m-8 shadow-md text-[#333]`}>
-                    <img src={journal.image} alt='journal' className='h-[300px] rounded-lg hidden lg:block'/>
-                    <div className='sm:px-6 w-full'>
-                        <div className='text-3xl w-full flex justify-start'>
-                            <div>{journal.title}</div>
-                        </div>
-                        <div className='flex justify-between mt-4'>
-                            <div>@{journal.author}</div>
-                            <div>{(journal.date).split("T")[0]}</div>
-                        </div>
-                        <div className='w-auto h-[70%] flex justify-center items-center text-xl text-left'>
-                            {journal.description}
-                        </div>
-                    </div>
-                </Link>
-            ))}
+      <div>
+  {filteredData.map((journal, index) => (
+    <motion.div
+      whileHover={{
+                      scale:1.05, 
+                    }}
+                    transition={{duration:0.5,bounce:0.5}}
+      key={index}
+    >
+      <Link to={`/${journal._id}`} className={`flex ${(index % 2 === 0) ? 'flex-row' : 'lg:flex-row-reverse'} sm:p-4 m-8 shadow-md text-[#333]`}>
+        <img src={journal.image} alt="journal" className="h-[300px] rounded-lg hidden lg:block" />
+        <div className="sm:px-6 w-full">
+          <div className="text-3xl w-full flex justify-start">
+            <div>{journal.title}</div>
+          </div>
+          <div className="flex justify-between mt-4">
+            <div>@{journal.author}</div>
+            <div>{(journal.date).split('T')[0]}</div>
+          </div>
+          <div className="w-auto h-[70%] flex justify-center items-center text-xl text-left">
+            {journal.description}
+          </div>
         </div>
+      </Link>
+    </motion.div>
+  ))}
+</div>
+
     </>
   )
 }
