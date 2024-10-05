@@ -1,11 +1,10 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema({
-    userName: {type: String, required: true},
-    password: {type: String, required: true},
-    email: {type: String, required: true},
-})
+  username: { type: String, required: true },
+  email: { type: String, required: true, unique: true },
+  hash: String,
+  salt: String,
+});
 
-const userModel = mongoose.model('webathon-user', userSchema);
-
-module.exports = {userModel};
+module.exports = mongoose.model("User", userSchema);
