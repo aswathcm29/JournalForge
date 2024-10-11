@@ -109,6 +109,7 @@ const Navbar = () => {
             className="lg:hidden"
           >
             <img  src={isMenuOpen ? close : hamburger} className={`h-8 ${isMenuOpen ? " fixed top-[1rem] " : " "}    z-[100] `} />
+            
             </button>
         )}
       </header>
