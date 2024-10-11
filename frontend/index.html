@@ -5,9 +5,28 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + React</title>
+    <link rel="stylesheet" href="/path/to/your/app.css" /> 
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <button class="search-button">Search</button>
+      <button class="return-to-top hidden" id="returnToTop">↑ Return to Top</button>
+    </div>
     <script type="module" src="/src/main.jsx"></script>
+    <script>
+      const returnToTopButton = document.getElementById('returnToTop');
+
+      window.onscroll = function() {
+        if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+          returnToTopButton.classList.add('show');
+        } else {
+          returnToTopButton.classList.remove('show');
+        }
+      };
+
+      returnToTopButton.onclick = function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      };
+    </script>
   </body>
 </html>
