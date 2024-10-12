@@ -63,21 +63,31 @@ To use the AI-powered features of JournalForge, you'll need a Groq API key. Here
    GROQ_TOKEN=your_groq_api_key
    ```
 
-3. Start the backend server:
-   ```
-   cd backend
-   npm install
-   npm start
-   ```
+3. **Option 1: Run Locally**:
+   - **Start the backend server**:
+     ```bash
+     cd backend
+     npm install
+     npm start
+     ```
+   - **Start the frontend server in a new terminal**:
+     ```bash
+     cd frontend
+     npm install
+     npm start
+     ```
 
-4. In a new terminal, start the frontend server:
-   ```
-   cd frontend
-   npm install
-   npm start
-   ```
+   The backend will be accessible at `http://localhost:5173` (or the specified port), and the frontend will run on `http://localhost:8000`.
 
-The backend server will run on `http://localhost:5000` (or your specified port), and the frontend will be available at `http://localhost:3000`.
+4. **Option 2: Run with Docker**:
+   - Ensure Docker is installed on your system.
+   - **Run the entire app using Docker Compose**:
+     ```bash
+     docker-compose up --build
+     ```
+   
+   This will spin up both the frontend and backend containers. The frontend will be available at `http://localhost:5173` and the backend at `http://localhost:8000` (or as configured in the `.env`).
+
 
 ## Contributing
 
