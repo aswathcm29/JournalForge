@@ -5,6 +5,7 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { useTitle } from '../../hooks/useTitle';
 
 const LoginForm = () => {
     const [userName, setUserName] = useState('');
@@ -129,6 +130,7 @@ const LoginForm = () => {
 };
 
 const Login = () => {
+    useTitle("Login")
     return (
         <div className=''>
             <div className='flex items-center justify-center rounded-2xl h-[86vh]'>

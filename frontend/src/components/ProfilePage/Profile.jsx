@@ -7,8 +7,10 @@ import { TbEdit } from "react-icons/tb";
 import { MdDeleteOutline } from "react-icons/md";
 import AddJournals from '../Journals/AddJournals';
 import { ToastContainer, toast } from 'react-toastify';
+import { useTitle } from '../../hooks/useTitle';
 
 const Profile = () => {
+    useTitle("Profile")
     const navigator = useNavigate()
     const [userName, setUserName] = useState('');
     const [data, setData] = useState([]);

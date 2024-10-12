@@ -1,8 +1,10 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
 import './ContactusStyles.css'
+import { useTitle } from '../../hooks/useTitle'
 
 const ContactusForm = () =>{
+    useTitle('Contact-us');
     return(
         <div className='w-full text-[#333]'>
             <div className='input-double-wrapper'>

@@ -3,8 +3,10 @@ import React from 'react'
 import homeimg from '../../assets/homepage.png'
 import { TypeAnimation } from 'react-type-animation';
 import { useNavigate } from 'react-router';
+import { useTitle } from '../../hooks/useTitle';
 
 const Welcome = () => {
+  useTitle("Welcome")
   const navigate = useNavigate()
   const toExplore=()=>{
     navigate('/journals')

@@ -4,6 +4,7 @@ import React, {useEffect, useState} from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import {motion} from 'framer-motion'
+import { useTitle } from '../../hooks/useTitle'
 
 const Search = () =>{
     const [search,setSearch] = useState('')
@@ -22,6 +23,7 @@ const Search = () =>{
 }
 
 const Journals = () => {
+  useTitle("Journals")
     const [data, setData] = useState([]);
     const [search,setSearch] = useState('')
     const [filteredData,setfilteredData] = useState(data)
