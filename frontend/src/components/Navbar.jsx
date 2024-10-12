@@ -6,6 +6,7 @@ import hamburger from "../assets/burger-menu-svgrepo-com.svg";
 import close from "../assets/close-svgrepo-com.svg";
 import { AnimatePresence, motion } from "framer-motion";
 import MagneticEffect from "./util/MagneticEffect";
+import LogoImage from "./Logo";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -51,10 +52,7 @@ const Navbar = () => {
   return (
     <>
       <header className="flex items-center justify-between border-b-4 border-green-400 p-4">
-        {/* Logo */}
-        <span className="text-5xl">
-          J<span className="text-4xl mb-2 absolute">F</span>
-        </span>
+        <LogoImage></LogoImage>
 
         {/* Desktop Nav Links */}
         {!isMobile && (
