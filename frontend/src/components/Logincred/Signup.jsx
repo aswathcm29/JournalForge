@@ -22,9 +22,58 @@ const SignupForm = () => {
   // State for toggling password visibility
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [validationMessages, setValidationMessages] = useState({
+    lengthValid: true,
+    uppercaseValid: true,
+    specialCharValid: true,
+  });
 
+  // Password validation function
+  const validatePassword = (value) => {
+    // if(value.length==0){
+    //   set
+    // }
+    const lengthValid = value.length >= 8;
+    const uppercaseValid = /[A-Z]/.test(value);
+    const specialCharValid = /[!@#$%^&*]/.test(value);
+
+    // Update validation state
+    setValidationMessages({
+      lengthValid,
+      uppercaseValid,
+      specialCharValid,
+    });
+  };
+  const getValidationMessage = () => {
+    const { lengthValid, uppercaseValid, specialCharValid } =
+      validationMessages;
+
+    if (!uppercaseValid) {
+      return "Password must contain at least one uppercase letter";
+    }
+    if (!specialCharValid) {
+      return "Password must contain at least one special character";
+    }
+    if (!lengthValid) {
+      return "Password must be at least 8 characters long";
+    }
+    return "Password is valid";
+  };
+
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return false;
+    } else {
+      return true;
+    }
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!validateEmail(email)) {
+      toast.error("Enter valid Email");
+      return;
+    }
     if (password !== confirmPassword) {
       toast.error("Password does not match");
       return;
@@ -40,7 +89,7 @@ const SignupForm = () => {
         {
           headers: {
             "Content-Type": "application/json",
-          }
+          },
         }
       );
       if (response.status === 200) {
@@ -109,7 +158,7 @@ const SignupForm = () => {
           </div>
 
           {/* Password Input with Eye Icon */}
-          <div className="relative">
+          <div className="relative ">
             <input
               placeholder="Password"
               className="peer h-10 w-full border-b-2 border-solid border-gray-300 text-black bg-transparent placeholder-transparent focus:outline-none focus:border-gray-500"
@@ -117,7 +166,10 @@ const SignupForm = () => {
               id="password"
               name="password"
               type={showPassword ? "text" : "password"} // Toggle between text and password types
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => {
+                setPassword(e.target.value);
+                validatePassword(e.target.value);
+              }}
             />
             <label
               className="absolute left-0 -top-3.5 text-gray-900 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:text-green-400 peer-focus:text-sm"
@@ -130,18 +182,34 @@ const SignupForm = () => {
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-2 top-[55%] transform -translate-y-1/2 text-gray-500"
+              className="absolute right-2 top-[55%]  transform -translate-y-1/2 text-gray-500"
               style={{ fontSize: "20px" }} // Adjusted icon size
             >
               {showPassword ? <FaEyeSlash /> : <FaEye />}
             </button>
+
+            {password.length == 0 ? (
+              <></>
+            ) : (
+              <p
+                className={`text-left h-[1.5rem]   sm:h-[1rem]   text-sm ${
+                  getValidationMessage() === "Password is valid"
+                    ? "text-green-500"
+                    : "text-red-500"
+                }`}
+              >
+                {getValidationMessage()}
+              </p>
+            )}
+           
           </div>
+          
 
           {/* Confirm Password Input with Eye Icon */}
-          <div className="relative">
+          <div className="relative  ">
             <input
               placeholder="Confirm Password"
-              className="peer h-10 w-full border-b-2 border-solid border-gray-300 text-black bg-transparent placeholder-transparent focus:outline-none focus:border-gray-500"
+              className="peer  h-10 w-full border-b-2 border-solid border-gray-300 text-black bg-transparent placeholder-transparent focus:outline-none focus:border-gray-500"
               required=""
               id="confirmPassword"
               name="confirmPassword"
