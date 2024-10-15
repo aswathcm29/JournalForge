@@ -10,6 +10,17 @@ const LoginForm = () => {
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false); // State for toggling password visibility
+
+    const validateEmail=(email)=>{
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if(!emailRegex.test(email)){
+        return false;
+
+      }
+      else{
+        return true;
+      }
+    }
     const navigate = useNavigate();
 
     const toSignup = () => {
@@ -18,6 +29,10 @@ const LoginForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (!validateEmail(email)) {
+            toast.error("Enter valid Email");
+            return;
+          }
         try {
             const response = await axios.post(`${import.meta.env.VITE_BASE_URL}users/login`, {
                 userName, password
