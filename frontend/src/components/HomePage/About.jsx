@@ -1,7 +1,9 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect } from 'react'
+import { useTitle } from '../../hooks/useTitle'
 
 const About = () => {
+  useTitle("About")
   useEffect(()=>{
     window.scrollTo(0,0)
   },)

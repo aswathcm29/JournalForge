@@ -6,6 +6,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { FaEye, FaEyeSlash } from "react-icons/fa"; // Import the eye icons
+import { useTitle } from "../../hooks/useTitle";
 
 const SignupForm = () => {
   const navigate = useNavigate();
@@ -190,6 +191,7 @@ const SignupForm = () => {
 };
 
 const Signup = () => {
+  useTitle("Sign-up")
   return (
     <div>
       <div className="">

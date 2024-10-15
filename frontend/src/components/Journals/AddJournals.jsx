@@ -7,8 +7,10 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FaWandMagicSparkles } from "react-icons/fa6";
+import { useTitle } from '../../hooks/useTitle';
 
 const AddJournals = () => {
+  useTitle("Add-Journals")
   const modules = {
     toolbar: [
       [{ 'header': [1, 2, false] }],
