@@ -6,7 +6,7 @@ import hamburger from "../assets/burger-menu-svgrepo-com.svg";
 import close from "../assets/close-svgrepo-com.svg";
 import { AnimatePresence, motion } from "framer-motion";
 import MagneticEffect from "./util/MagneticEffect";
-import LogoImage from "./Logo";
+import LogoImage from "./NewLogo.jsx/Logo";
 
 const Navbar = () => {
   const navigate = useNavigate();
