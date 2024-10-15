@@ -10,7 +10,7 @@ function App() {
 
   useEffect(() => {
     const token = document.cookie.split("=")[0];
-    if (!token) {
+    if (token) {
       navigate("/");
     } else {
       navigate("/login");
