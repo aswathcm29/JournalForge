@@ -12,14 +12,18 @@
 .logo {
   height: 6em;
   padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+  will-change: filter, transform;
+  transition: filter 300ms, transform 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
+  transform: scale(1.1);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
+  transform: scale(1.1);
 }
 
 @keyframes logo-spin {
@@ -43,4 +47,25 @@
 
 .read-the-docs {
   color: #888;
+}
+
+/* Search Button Styles */
+.search-button {
+  background-color: #646cff; /* Default background color */
+  color: white; /* Default text color */
+  padding: 0.5em 1em;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: background-color 300ms, transform 200ms;
+}
+
+.search-button:hover {
+  background-color: #5058d4; /* Change on hover */
+}
+
+.search-button:focus,
+.search-button:active {
+  background-color: #61dafb; /* Change on focus/click */
+  transform: scale(0.95); /* Optional: slight scaling effect */
 }
