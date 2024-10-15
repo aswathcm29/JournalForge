@@ -44,3 +44,14 @@
 .read-the-docs {
   color: #888;
 }
+
+.bot{
+  border-top: 3px solid #4ade80 !important;
+}
+
+.social{
+  transition: all 0.3s ease-in;
+}
+.social:hover{
+  transform: translateY(-0.3rem);
+} 
