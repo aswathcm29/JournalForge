@@ -108,8 +108,9 @@ const Navbar = () => {
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="lg:hidden"
           >
-            <img src={isMenuOpen ? close : hamburger} className="h-8" />
-          </button>
+            <img  src={isMenuOpen ? close : hamburger} className={`h-8 ${isMenuOpen ? " fixed top-[1rem] " : " "}    z-[100] `} />
+            
+            </button>
         )}
       </header>
 
