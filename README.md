@@ -83,6 +83,22 @@ The backend server will run on `http://localhost:5000` (or your specified port),
 
 We welcome contributions from the open-source community! Please read our [CONTRIBUTING.md](CONTRIBUTING.md) file for more details on our code of conduct, development process, and how to submit pull requests.
 
+---
+
+## 👀 Our Contributors
+
+- We extend our heartfelt gratitude for your invaluable contribution to our project! Your efforts play a pivotal role in elevating this project to greater heights.
+- Make sure you show some love by giving ⭐ to our repository.
+
+<div align="center">
+
+  <a href="https://github.com/aswathcm29/JournalForge">
+    <img src="https://contrib.rocks/image?repo=aswathcm29/JournalForge&&max=100" />
+  </a>
+</div>
+
+---
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](./LICENSE.md) file for details.
