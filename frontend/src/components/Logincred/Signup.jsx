@@ -23,12 +23,32 @@ const SignupForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
+  // Validation function
+  const validateForm = () => {
+    if (userName.length < 3) {
+      toast.error("Username must be at least 3 characters long");
+      return false;
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      toast.error("Please enter a valid email address");
+      return false;
+    }
+    if (password.length < 6) {
+      toast.error("Password must be at least 6 characters long");
+      return false;
+    }
+    if (password !== confirmPassword) {
+      toast.error("Passwords do not match");
+      return false;
+    }
+    return true;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (password !== confirmPassword) {
-      toast.error("Password does not match");
-      return;
-    }
+    if (!validateForm()) return;
+
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_BASE_URL}users/signup`,
@@ -116,7 +136,7 @@ const SignupForm = () => {
               required=""
               id="password"
               name="password"
-              type={showPassword ? "text" : "password"} // Toggle between text and password types
+              type={showPassword ? "text" : "password"}
               onChange={(e) => setPassword(e.target.value)}
             />
             <label
@@ -125,13 +145,11 @@ const SignupForm = () => {
             >
               Password
             </label>
-
-            {/* Eye icon to toggle password visibility */}
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
               className="absolute right-2 top-[55%] transform -translate-y-1/2 text-gray-500"
-              style={{ fontSize: "20px" }} // Adjusted icon size
+              style={{ fontSize: "20px" }}
             >
               {showPassword ? <FaEyeSlash /> : <FaEye />}
             </button>
@@ -145,7 +163,7 @@ const SignupForm = () => {
               required=""
               id="confirmPassword"
               name="confirmPassword"
-              type={showConfirmPassword ? "text" : "password"} // Toggle between text and password types
+              type={showConfirmPassword ? "text" : "password"}
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
             <label
@@ -154,13 +172,11 @@ const SignupForm = () => {
             >
               Confirm Password
             </label>
-
-            {/* Eye icon to toggle confirm password visibility */}
             <button
               type="button"
               onClick={() => setShowConfirmPassword(!showConfirmPassword)}
               className="absolute right-2 top-[55%] transform -translate-y-1/2 text-gray-500"
-              style={{ fontSize: "20px" }} // Adjusted icon size
+              style={{ fontSize: "20px" }}
             >
               {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
             </button>
