@@ -41,6 +41,26 @@ app.get('/',(req, res)=>{
 
 
 app.use('/uploads',express.static('uploads'))
+const express = require('express');
+const { journalModel } = require('./models/journalModel'); // Assuming your journal model is in this path
+const { userModel } = require('./models/userModel');
+const router = express.Router();
+
+// Route to get the count of journals for a user
+router.get('/streak/:userName', async (req, res) => {
+  try {
+    const { userName } = req.params;
+    
+    // Count the number of journals for the user
+    const journalCount = await journalModel.countDocuments({ userName });
+    
+    res.status(200).json({ count: journalCount });
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to fetch journal count' });
+  }
+});
+
+module.exports = router;
 
 app.use('/users', userRoutes);
 app.use('/journal', journalRoutes);

@@ -1,0 +1,29 @@
+.streak-page {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .streak-page h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
+  .streak-page p {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+  
+  .streak-page .btn {
+    background-color: #4ade80;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .streak-page .btn:hover {
+    background-color: #3cc167;
+  }
+  
