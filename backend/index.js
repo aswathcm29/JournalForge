@@ -8,8 +8,7 @@ const userRoutes = require('./routes/userRoutes');
 const journalRoutes = require('./routes/journalRoutes');
 const multer  = require('multer')
 
-
-
+const port = process.env.PORT || 8000;
 
 const app = express();
 app.use(express.json());
@@ -20,8 +19,8 @@ const saltRounds = 10;
 const dotenv = require('dotenv');
 dotenv.config({ path: './.env' });
 
-app.listen(process.env.PORT,()=>{
-    console.log(`server running on port ${process.env.PORT}`);
+app.listen(port,()=>{
+    console.log(`server running on port ${port}`);
 })
 
 try{
